@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Cayd.Test.Generators.Test.Unit" />
+  </ItemGroup>
+
 </Project>
