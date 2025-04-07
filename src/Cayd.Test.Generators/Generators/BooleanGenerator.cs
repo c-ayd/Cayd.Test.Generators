@@ -1,4 +1,4 @@
-﻿namespace Cayd.Test.Generators.Generators
+﻿namespace Cayd.Test.Generators
 {
     public static class BooleanGenerator
     {

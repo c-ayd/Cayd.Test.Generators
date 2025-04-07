@@ -1,6 +1,4 @@
-﻿using Cayd.Test.Generators.Generators;
-
-namespace Cayd.Test.Generators.Test.Unit.Generators
+﻿namespace Cayd.Test.Generators.Test.Unit.Generators
 {
     public class NumberGeneratorTest
     {

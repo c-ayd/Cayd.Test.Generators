@@ -1,5 +1,4 @@
-﻿using Cayd.Test.Generators.Generators;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Cayd.Test.Generators.Test.Unit.Generators
 {
