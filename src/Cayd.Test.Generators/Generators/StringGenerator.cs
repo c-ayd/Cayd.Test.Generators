@@ -10,6 +10,7 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <param name="length">Length of the string.</param>
         /// <returns>Returns a random string containing only Ascii characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingAsciiChars(int length)
             => GenerateString(AsciiChars, length);
 
@@ -18,6 +19,7 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <param name="length">Length of the string.</param>
         /// <returns>Returns a random string containing only Base64 URL characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingBase64UrlChars(int length)
             => GenerateString(Base64UrlChars, length);
 
@@ -26,6 +28,7 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <param name="length">Length of the string.</param>
         /// <returns>Returns a random string containing only the given characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingCustomChars(List<char> chars, int length)
             => GenerateString(chars, length);
 
@@ -35,6 +38,7 @@ namespace Cayd.Test.Generators
         /// <param name="format">Format to generate string. Example: "Hello, {0}. Welcome back!"</param>
         /// <param name="parameterLengths">Length of the parameters in the format. Pass only one length if all parameters need to be the same length. Otherwise, the number of lengths must match with the number of the parameters.</param>
         /// <returns>Returns a random string containing only Ascii characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingAsciiCharsWithFormat(string format, params int[] parameterLengths)
             => GenerateStringWithFormat(format, AsciiChars, parameterLengths);
 
@@ -44,6 +48,7 @@ namespace Cayd.Test.Generators
         /// <param name="format">Format to generate string. Example: "Hello, {0}. Welcome back!"</param>
         /// <param name="parameterLengths">Length of the parameters in the format. Pass only one length if all parameters need to be the same length. Otherwise, the number of lengths must match with the number of the parameters.</param>
         /// <returns>Returns a random string containing only Base64 URL characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingBase64UrlCharsWithFormat(string format, params int[] parameterLengths)
             => GenerateStringWithFormat(format, Base64UrlChars, parameterLengths);
 
@@ -53,6 +58,7 @@ namespace Cayd.Test.Generators
         /// <param name="format">Format to generate string. Example: "Hello, {0}. Welcome back!"</param>
         /// <param name="parameterLengths">Length of the parameters in the format. Pass only one length if all parameters need to be the same length. Otherwise, the number of lengths must match with the number of the parameters.</param>
         /// <returns>Returns a random string containing only the given characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GenerateUsingCustomCharsWithFormat(string format, List<char> chars, params int[] parameterLengths)
             => GenerateStringWithFormat(format, chars, parameterLengths);
 
