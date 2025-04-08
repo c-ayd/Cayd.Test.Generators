@@ -29,7 +29,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Arrange
             Assert.NotNull(result);
-            Assert.True(result.Count == 8, $"Count: {result.Count}. Expected: 8");
+            Assert.Equal(8, result.Count);
             Assert.True(values.SequenceEqual(result), $"The values or the order of the list is not the same");
         }
 
@@ -45,7 +45,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Arrange
             Assert.NotNull(result);
-            Assert.True(result.Count == 5, $"Count: {result.Count}. Expected: 5");
+            Assert.Equal(5, result.Count);
             Assert.True(values.SequenceEqual(result), $"The values or the order of the list is not the same");
         }
 

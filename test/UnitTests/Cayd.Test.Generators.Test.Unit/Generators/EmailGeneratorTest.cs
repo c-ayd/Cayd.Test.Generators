@@ -16,7 +16,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Assert
             var length = usernameLength + domainPartLength + tldLength + 2;
-            Assert.True(result.Length == length, $"Result Length: {result.Length}, Expected: {length}");
+            Assert.Equal(length, result.Length);
         }
 
         [Fact]
@@ -33,8 +33,8 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             // Assert
             var length = usernameLength + domain.Length + 1;
             var resultDomain = result.Split('@')[1];
-            Assert.True(result.Length == length, $"Result Length: {result.Length}, Expected: {length}");
-            Assert.True(resultDomain == domain, $"Result Domain: {resultDomain}, Expected: {domain}");
+            Assert.Equal(length, result.Length);
+            Assert.Equal(domain, resultDomain);
         }
     }
 }

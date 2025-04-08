@@ -16,7 +16,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Assert
             Assert.NotNull(result);
-            Assert.True(result.Length == 5, $"Length: {result.Length}, Expected: 5");
+            Assert.Equal(5, result.Length);
             Assert.True(result.All(c => chars.Contains(c)), "Result contains characters that are not in the list.");
         }
 
@@ -65,10 +65,10 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Assert
             Assert.NotNull(result);
-            Assert.True(expected == result, $"Result: {result}, Expected: {expected}");
-            Assert.True(string1.Length == 5, $"String1 Length: {string1.Length}, Expected: 5");
+            Assert.Equal(expected, result);
+            Assert.Equal(5, string1.Length);
             Assert.True(string1.All(c => chars.Contains(c)), "String1 contains characters that are not in the list.");
-            Assert.True(string2.Length == 10, $"String2 Length: {string2.Length}, Expected: 10");
+            Assert.Equal(10, string2.Length);
             Assert.True(string2.All(c => chars.Contains(c)), "String2 contains characters that are not in the list.");
         }
 
@@ -89,10 +89,10 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Assert
             Assert.NotNull(result);
-            Assert.True(expected == result, $"Result: {result}, Expected: {expected}");
-            Assert.True(string1.Length == 5, $"String1 Length: {string1.Length}, Expected: 5");
+            Assert.Equal(expected, result);
+            Assert.Equal(5, string1.Length);
             Assert.True(string1.All(c => chars.Contains(c)), "String1 contains characters that are not in the list.");
-            Assert.True(string2.Length == 5, $"String2 Length: {string2.Length}, Expected: 5");
+            Assert.Equal(5, string2.Length);
             Assert.True(string2.All(c => chars.Contains(c)), "String2 contains characters that are not in the list.");
         }
 
