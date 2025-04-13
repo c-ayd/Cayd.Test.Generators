@@ -14,7 +14,7 @@ namespace Cayd.Test.Generators
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < length; ++i)
             {
-                builder.Append(AllCharacters[Random.Shared.Next(0, AllCharacters.Count)]);
+                builder.Append(AllCharacters[System.Random.Shared.Next(0, AllCharacters.Count)]);
             }
 
             return builder.ToString();
@@ -41,15 +41,15 @@ namespace Cayd.Test.Generators
                 throw new ArgumentException($"According to the rules, the least number of length should be {leastNumberOfCharacters}", nameof(length));
 
             StringBuilder builder = new StringBuilder();
-            if (requireDigit) builder.Append(Digits[Random.Shared.Next(0, Digits.Count)]);
-            if (requireLowercase) builder.Append(LowercaseCharacters[Random.Shared.Next(0, LowercaseCharacters.Count)]);
-            if (requireUppercase) builder.Append(UppercaseCharacters[Random.Shared.Next(0, UppercaseCharacters.Count)]);
-            if (requireNonAlphaNumeric) builder.Append(NonAlphanumericCharacters[Random.Shared.Next(0, NonAlphanumericCharacters.Count)]);
+            if (requireDigit) builder.Append(Digits[System.Random.Shared.Next(0, Digits.Count)]);
+            if (requireLowercase) builder.Append(LowercaseCharacters[System.Random.Shared.Next(0, LowercaseCharacters.Count)]);
+            if (requireUppercase) builder.Append(UppercaseCharacters[System.Random.Shared.Next(0, UppercaseCharacters.Count)]);
+            if (requireNonAlphaNumeric) builder.Append(NonAlphanumericCharacters[System.Random.Shared.Next(0, NonAlphanumericCharacters.Count)]);
 
             length -= builder.Length;
             for (int i = 0; i < length; ++i)
             {
-                builder.Append(AllCharacters[Random.Shared.Next(0, AllCharacters.Count)]);
+                builder.Append(AllCharacters[System.Random.Shared.Next(0, AllCharacters.Count)]);
             }
 
             return builder.ToString();

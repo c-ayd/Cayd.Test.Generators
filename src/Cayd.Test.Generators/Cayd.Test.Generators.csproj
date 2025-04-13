@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Cayd.Test.Generators.Test.Unit" />
+    <PackageReference Include="Cayd.Random.Extensions" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Cayd.Test.Generators
+﻿using Cayd.Random.Extensions;
+
+namespace Cayd.Test.Generators
 {
     public static class TimeSpanGenerator
     {
@@ -9,13 +11,13 @@
         public static TimeSpan Generate()
         {
             var timeSpan = new TimeSpan(
-                Random.Shared.Next(0, 7),
-                Random.Shared.Next(0, 24),
-                Random.Shared.Next(0, 60),
-                Random.Shared.Next(0, 60),
-                Random.Shared.Next(1, 1000));
+                System.Random.Shared.Next(0, 7),
+                System.Random.Shared.Next(0, 24),
+                System.Random.Shared.Next(0, 60),
+                System.Random.Shared.Next(0, 60),
+                System.Random.Shared.Next(1, 1000));
 
-            return BooleanGenerator.Generate() ? timeSpan : -timeSpan;
+            return System.Random.Shared.NextBool() ? timeSpan : -timeSpan;
         }
 
         /// <summary>
@@ -26,11 +28,11 @@
         public static TimeSpan Generate(ETimeDirection timeDirection)
         {
             var timeSpan = new TimeSpan(
-                Random.Shared.Next(0, 7),
-                Random.Shared.Next(0, 24),
-                Random.Shared.Next(0, 60),
-                Random.Shared.Next(0, 60),
-                Random.Shared.Next(1, 1000));
+                System.Random.Shared.Next(0, 7),
+                System.Random.Shared.Next(0, 24),
+                System.Random.Shared.Next(0, 60),
+                System.Random.Shared.Next(0, 60),
+                System.Random.Shared.Next(1, 1000));
 
             return timeDirection == ETimeDirection.Positive ? timeSpan : -timeSpan;
         }
@@ -43,13 +45,13 @@
         public static TimeSpan GenerateWithLimit(TimeLimit timeLimit)
         {
             var timeSpan = new TimeSpan(
-                Random.Shared.Next(0, timeLimit.DayLimit + 1),
-                Random.Shared.Next(0, timeLimit.HourLimit + 1),
-                Random.Shared.Next(0, timeLimit.MinuteLimit + 1),
-                Random.Shared.Next(0, timeLimit.SecondLimit + 1),
-                Random.Shared.Next(0, timeLimit.MillisecondLimit + 1));
+                System.Random.Shared.Next(0, timeLimit.DayLimit + 1),
+                System.Random.Shared.Next(0, timeLimit.HourLimit + 1),
+                System.Random.Shared.Next(0, timeLimit.MinuteLimit + 1),
+                System.Random.Shared.Next(0, timeLimit.SecondLimit + 1),
+                System.Random.Shared.Next(0, timeLimit.MillisecondLimit + 1));
 
-            return BooleanGenerator.Generate() ? timeSpan : -timeSpan;
+            return System.Random.Shared.NextBool() ? timeSpan : -timeSpan;
         }
 
         /// <summary>
@@ -61,11 +63,11 @@
         public static TimeSpan GenerateWithLimit(ETimeDirection timeDirection, TimeLimit timeLimit)
         {
             var timeSpan = new TimeSpan(
-               Random.Shared.Next(0, timeLimit.DayLimit + 1),
-               Random.Shared.Next(0, timeLimit.HourLimit + 1),
-               Random.Shared.Next(0, timeLimit.MinuteLimit + 1),
-               Random.Shared.Next(0, timeLimit.SecondLimit + 1),
-               Random.Shared.Next(0, timeLimit.MillisecondLimit + 1));
+               System.Random.Shared.Next(0, timeLimit.DayLimit + 1),
+               System.Random.Shared.Next(0, timeLimit.HourLimit + 1),
+               System.Random.Shared.Next(0, timeLimit.MinuteLimit + 1),
+               System.Random.Shared.Next(0, timeLimit.SecondLimit + 1),
+               System.Random.Shared.Next(0, timeLimit.MillisecondLimit + 1));
 
             return timeDirection == ETimeDirection.Positive ? timeSpan : -timeSpan;
         }

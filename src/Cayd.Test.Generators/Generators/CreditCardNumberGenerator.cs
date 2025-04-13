@@ -13,7 +13,7 @@ namespace Cayd.Test.Generators
         public static string Generate(CreditCardNetwork network)
         {
             StringBuilder builder = new StringBuilder()
-                .Append(network.IINRanges[Random.Shared.Next(0, network.IINRanges.Count)]);
+                .Append(network.IINRanges[System.Random.Shared.Next(0, network.IINRanges.Count)]);
 
             int length = network.Length - builder.Length;
             if (length < 1)
@@ -22,7 +22,7 @@ namespace Cayd.Test.Generators
             --length;
             for (int i = 0; i < length; ++i)
             {
-                builder.Append(Digits[Random.Shared.Next(0, Digits.Count)]);
+                builder.Append(Digits[System.Random.Shared.Next(0, Digits.Count)]);
             }
 
             bool @double = true;

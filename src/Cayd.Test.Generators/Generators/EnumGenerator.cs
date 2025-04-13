@@ -12,7 +12,7 @@
             where T : Enum
         {
             var values = GetEnumValues(exclude);
-            return values[Random.Shared.Next(values.Count())];
+            return values[System.Random.Shared.Next(values.Count())];
         }
 
         /// <summary>
@@ -38,7 +38,7 @@
 
             int minIndex = values.FindIndex(0, values.Count, e => e.Equals(min));
             int maxIndex = values.FindIndex(0, values.Count, e => e.Equals(max));
-            return values[Random.Shared.Next(minIndex, maxIndex)];
+            return values[System.Random.Shared.Next(minIndex, maxIndex)];
         }
 
         /// <summary>
@@ -62,12 +62,12 @@
             switch (direction)
             {
                 case EDirection.Up:
-                    return values[Random.Shared.Next(startIndex, values.Count)];
+                    return values[System.Random.Shared.Next(startIndex, values.Count)];
                 default:
                     if (startIndex == values.Count - 1)
-                        return values[Random.Shared.Next(0, values.Count)];
+                        return values[System.Random.Shared.Next(0, values.Count)];
 
-                    return values[Random.Shared.Next(0, startIndex + 1)];
+                    return values[System.Random.Shared.Next(0, startIndex + 1)];
             }
         }
 

@@ -17,7 +17,7 @@
         {
             byte[] dateTimeBytes = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
             byte[] randomBytes = new byte[8];
-            Random.Shared.NextBytes(randomBytes);
+            System.Random.Shared.NextBytes(randomBytes);
 
             byte[] guidBytes = new byte[16];
             Array.Copy(dateTimeBytes, 0, guidBytes, 0, 8);

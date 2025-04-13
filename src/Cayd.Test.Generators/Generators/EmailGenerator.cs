@@ -9,7 +9,7 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <returns>Returns a random email.</returns>
         public static string Generate()
-            => GenerateEmail(Random.Shared.Next(5, 11), Random.Shared.Next(5, 11), 3);
+            => GenerateEmail(System.Random.Shared.Next(5, 11), System.Random.Shared.Next(5, 11), 3);
 
         /// <summary>
         /// Generates a random email based on provided lengths. If any parameter is skipped, the skipped ones' lengths are the defaults, which is as same as <see cref="Generate"/>.
@@ -19,7 +19,7 @@ namespace Cayd.Test.Generators
         /// <param name="tldLength">Length of the top-level domain of the email.</param>
         /// <returns>Returns a random email based on the provided lengths.</returns>
         public static string GenerateCustomLength(int? localPartLength, int? domainPartLength, int? tldLength)
-            => GenerateEmail(localPartLength ?? Random.Shared.Next(5, 11), domainPartLength ?? Random.Shared.Next(5, 11), tldLength ?? 3);
+            => GenerateEmail(localPartLength ?? System.Random.Shared.Next(5, 11), domainPartLength ?? System.Random.Shared.Next(5, 11), tldLength ?? 3);
 
         /// <summary>
         /// Generates a random email based on a provided domain.
@@ -28,30 +28,30 @@ namespace Cayd.Test.Generators
         /// <param name="localPartLength">Length of the local part of the email. This parameter can be skipped if the default length is desired.</param>
         /// <returns>Returns a random email based on the provided domain.</returns>
         public static string GenerateCustomDomain(string domain, int? localPartLength)
-            => GenerateEmail(domain, localPartLength ?? Random.Shared.Next(5, 11));
+            => GenerateEmail(domain, localPartLength ?? System.Random.Shared.Next(5, 11));
 
         private static string GenerateEmail(int localPartLength, int domainPartLength, int tldLength)
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(AlphanumericCharacters[Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+            builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
             for (int i = 0; i < localPartLength - 1; ++i)
             {
-                builder.Append(LocalPartCharacters[Random.Shared.Next(0, LocalPartCharacters.Count)]);
+                builder.Append(LocalPartCharacters[System.Random.Shared.Next(0, LocalPartCharacters.Count)]);
             }
 
             builder.Append('@');
 
             for (int i = 0; i < domainPartLength; ++i)
             {
-                builder.Append(DomainCharacters[Random.Shared.Next(0, DomainCharacters.Count)]);
+                builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
             }
 
             builder.Append('.');
 
             for (int i = 0; i < tldLength; ++i)
             {
-                builder.Append(DomainCharacters[Random.Shared.Next(0, DomainCharacters.Count)]);
+                builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
             }
 
             return builder.ToString();
@@ -61,10 +61,10 @@ namespace Cayd.Test.Generators
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(AlphanumericCharacters[Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+            builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
             for (int i = 0; i < localPartLength - 1; ++i)
             {
-                builder.Append(LocalPartCharacters[Random.Shared.Next(0, LocalPartCharacters.Count)]);
+                builder.Append(LocalPartCharacters[System.Random.Shared.Next(0, LocalPartCharacters.Count)]);
             }
 
             builder.Append('@')

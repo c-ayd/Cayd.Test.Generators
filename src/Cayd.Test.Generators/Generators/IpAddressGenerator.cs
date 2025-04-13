@@ -11,7 +11,7 @@ namespace Cayd.Test.Generators
         public static string GenerateIpv4()
         {
             var classes = typeof(EClass).GetEnumValues().OfType<EClass>().ToList();
-            var @class = classes[Random.Shared.Next(0, classes.Count)];
+            var @class = classes[System.Random.Shared.Next(0, classes.Count)];
             return _GenerateIpv4(@class);
         }
 
@@ -30,7 +30,7 @@ namespace Cayd.Test.Generators
         public static string GenerateIpv4WithMask()
         {
             var classes = typeof(EClass).GetEnumValues().OfType<EClass>().ToList();
-            var @class = classes[Random.Shared.Next(0, classes.Count)];
+            var @class = classes[System.Random.Shared.Next(0, classes.Count)];
             var ip = _GenerateIpv4(@class);
             return AddMaskToIpv4(ip, (EMaskType)@class);
         }
@@ -58,7 +58,7 @@ namespace Cayd.Test.Generators
         public static string GeneratePrivateIpv4()
         {
             var classes = typeof(EPrivateClass).GetEnumValues().OfType<EPrivateClass>().ToList();
-            var @class = classes[Random.Shared.Next(0, classes.Count)];
+            var @class = classes[System.Random.Shared.Next(0, classes.Count)];
             return _GeneratePrivateIpv4((EClass)@class);
         }
 
@@ -77,7 +77,7 @@ namespace Cayd.Test.Generators
         public static string GeneratePrivateIpv4WithMask()
         {
             var classes = typeof(EPrivateClass).GetEnumValues().OfType<EPrivateClass>().ToList();
-            var @class = classes[Random.Shared.Next(0, classes.Count)];
+            var @class = classes[System.Random.Shared.Next(0, classes.Count)];
             var ip = _GeneratePrivateIpv4((EClass)@class);
             return AddMaskToIpv4(ip, (EMaskType)@class);
         }
@@ -100,7 +100,7 @@ namespace Cayd.Test.Generators
         public static string GenerateIpv6()
         {
             var types = typeof(Ipv6Type).GetEnumValues().OfType<Ipv6Type>().ToList();
-            var type = types[Random.Shared.Next(0, types.Count)];
+            var type = types[System.Random.Shared.Next(0, types.Count)];
             return _GenerateIpv6(type);
         }
 
@@ -119,9 +119,9 @@ namespace Cayd.Test.Generators
         public static string GenerateIpv6WithPrefixLength()
         {
             var types = typeof(Ipv6Type).GetEnumValues().OfType<Ipv6Type>().ToList();
-            var type = types[Random.Shared.Next(0, types.Count)];
+            var type = types[System.Random.Shared.Next(0, types.Count)];
             var ip = _GenerateIpv6(type);
-            return AddPrefixLengthToIpv6(ip, Random.Shared.Next(1, 129));
+            return AddPrefixLengthToIpv6(ip, System.Random.Shared.Next(1, 129));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Cayd.Test.Generators
                 throw new ArgumentOutOfRangeException(nameof(prefixLength), prefixLength, "The prefix length must be between 1 and 128");
 
             var ip = _GenerateIpv6(type);
-            return AddPrefixLengthToIpv6(ip, Random.Shared.Next(1, 129));
+            return AddPrefixLengthToIpv6(ip, System.Random.Shared.Next(1, 129));
         }
 
         private static string _GenerateIpv4(EClass @class)
@@ -146,36 +146,36 @@ namespace Cayd.Test.Generators
             switch (@class)
             {
                 case EClass.A:
-                    octets[0] = PublicClassAOctet1Numbers[Random.Shared.Next(0, PublicClassAOctet1Numbers.Count)];
-                    octets[1] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[0] = PublicClassAOctet1Numbers[System.Random.Shared.Next(0, PublicClassAOctet1Numbers.Count)];
+                    octets[1] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 case EClass.B:
-                    octets[0] = PublicClassBOctet1Numbers[Random.Shared.Next(0, PublicClassBOctet1Numbers.Count)];
-                    octets[1] = octets[0] == 172 ? PublicClassBOctet2Numbers[Random.Shared.Next(0, PublicClassBOctet2Numbers.Count)] 
-                        : OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[0] = PublicClassBOctet1Numbers[System.Random.Shared.Next(0, PublicClassBOctet1Numbers.Count)];
+                    octets[1] = octets[0] == 172 ? PublicClassBOctet2Numbers[System.Random.Shared.Next(0, PublicClassBOctet2Numbers.Count)] 
+                        : OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 case EClass.C:
-                    octets[0] = PublicClassCOctet1Numbers[Random.Shared.Next(0, PublicClassCOctet1Numbers.Count)];
-                    octets[1] = octets[1] == 192 ? PublicClassCOctet2Numbers[Random.Shared.Next(0, PublicClassCOctet2Numbers.Count)]
-                        : OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[0] = PublicClassCOctet1Numbers[System.Random.Shared.Next(0, PublicClassCOctet1Numbers.Count)];
+                    octets[1] = octets[1] == 192 ? PublicClassCOctet2Numbers[System.Random.Shared.Next(0, PublicClassCOctet2Numbers.Count)]
+                        : OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 case EClass.D:
-                    octets[0] = PublicClassDOctet1Numbers[Random.Shared.Next(0, PublicClassDOctet1Numbers.Count)];
-                    octets[1] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[0] = PublicClassDOctet1Numbers[System.Random.Shared.Next(0, PublicClassDOctet1Numbers.Count)];
+                    octets[1] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 default:
-                    octets[0] = PublicClassEOctet1Numbers[Random.Shared.Next(0, PublicClassEOctet1Numbers.Count)];
-                    octets[1] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[0] = PublicClassEOctet1Numbers[System.Random.Shared.Next(0, PublicClassEOctet1Numbers.Count)];
+                    octets[1] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
             }
 
@@ -195,21 +195,21 @@ namespace Cayd.Test.Generators
             {
                 case EClass.A:
                     octets[0] = 10;
-                    octets[1] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[1] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 case EClass.B:
                     octets[0] = 172;
-                    octets[1] = PrivateClassBOctet2Numbers[Random.Shared.Next(0, PrivateClassBOctet2Numbers.Count)];
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[1] = PrivateClassBOctet2Numbers[System.Random.Shared.Next(0, PrivateClassBOctet2Numbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
                 default:
                     octets[0] = 192;
                     octets[1] = 168;
-                    octets[2] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
-                    octets[3] = OctetNumbers[Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[2] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
+                    octets[3] = OctetNumbers[System.Random.Shared.Next(0, OctetNumbers.Count)];
                     break;
             }
 
@@ -241,13 +241,13 @@ namespace Cayd.Test.Generators
             switch (type)
             {
                 case Ipv6Type.GlobalUnicast:
-                    firstHextet = GuaHextet1Numbers[Random.Shared.Next(0, GuaHextet1Numbers.Count)];
+                    firstHextet = GuaHextet1Numbers[System.Random.Shared.Next(0, GuaHextet1Numbers.Count)];
                     break;
                 case Ipv6Type.LinkLocal:
-                    firstHextet = LinkLocalHextet1Numbers[Random.Shared.Next(0, LinkLocalHextet1Numbers.Count)];
+                    firstHextet = LinkLocalHextet1Numbers[System.Random.Shared.Next(0, LinkLocalHextet1Numbers.Count)];
                     break;
                 default:
-                    firstHextet = MulticastHextet1Numbers[Random.Shared.Next(0, MulticastHextet1Numbers.Count)];
+                    firstHextet = MulticastHextet1Numbers[System.Random.Shared.Next(0, MulticastHextet1Numbers.Count)];
                     break;
             }
 
@@ -255,7 +255,7 @@ namespace Cayd.Test.Generators
                 .Append(firstHextet).Append(':');
             for (int i = 1; i < 8; ++i)
             {
-                builder.Append(HextetNumbers[Random.Shared.Next(0, HextetNumbers.Count)])
+                builder.Append(HextetNumbers[System.Random.Shared.Next(0, HextetNumbers.Count)])
                     .Append(':');
             }
             builder.Remove(builder.Length - 1, 1);

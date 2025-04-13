@@ -9,14 +9,14 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <returns>Returns a random global phone number.</returns>
         public static string Generate()
-            => GeneratePhoneNumber("+", Random.Shared.Next(8, 16));
+            => GeneratePhoneNumber("+", System.Random.Shared.Next(8, 16));
 
         /// <summary>
         /// Generates a random local phone number whose length is between 8 and 15.
         /// </summary>
         /// <returns>Returns a random local phone number.</returns>
         public static string GenerateLocal()
-            => GeneratePhoneNumber("0", Random.Shared.Next(8, 16));
+            => GeneratePhoneNumber("0", System.Random.Shared.Next(8, 16));
 
         /// <summary>
         /// Generates a random global phone number based on a given length.
@@ -62,7 +62,7 @@ namespace Cayd.Test.Generators
 
             for (int i = 0; i < numberLength; ++i)
             {
-                builder.Append(Digits[Random.Shared.Next(0, Digits.Count)]);
+                builder.Append(Digits[System.Random.Shared.Next(0, Digits.Count)]);
             }
 
             return builder.ToString();

@@ -70,7 +70,7 @@ namespace Cayd.Test.Generators
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
-                builder.Append(chars[Random.Shared.Next(0, chars.Count)]);
+                builder.Append(chars[System.Random.Shared.Next(0, chars.Count)]);
             }
 
             return builder.ToString();
@@ -95,7 +95,7 @@ namespace Cayd.Test.Generators
                 int length = parameterLengths.Length == 1 ? parameterLengths[0] : parameterLengths[i];
                 for (int j = 0; j < length; j++)
                 {
-                    builder.Append(chars[Random.Shared.Next(0, chars.Count)]);
+                    builder.Append(chars[System.Random.Shared.Next(0, chars.Count)]);
                 }
 
                 parameters.Add(builder.ToString());
