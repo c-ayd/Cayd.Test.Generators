@@ -4,7 +4,33 @@
     <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Cayd.Test.Generators</PackageId>
+    <Title>Utility library to generate values and classes for tests</Title>
+    <Version>1.0.0</Version>
+    <Authors>Cemal A. Aydeniz</Authors>
+    <Product>Cayd.Test.Generators to generate values and classes for tests</Product>
+    <Description>A utility library for tests that simplifies the generation of variables and classes</Description>
+    <PackageProjectUrl>https://github.com/c-ayd/Cayd.Test.Generators</PackageProjectUrl>
+    <PackageIcon>nuget-logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/c-ayd/Cayd.Test.Generators.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>cayd;test;generators;utility;xunit;value-generator;class-generator</PackageTags>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\assets\nuget-logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Cayd.Random.Extensions" Version="1.0.2" />

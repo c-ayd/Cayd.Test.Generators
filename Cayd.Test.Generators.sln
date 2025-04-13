@@ -18,7 +18,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cayd.Test.Generators", "src\Cayd.Test.Generators\Cayd.Test.Generators.csproj", "{1ADCDFA8-860D-486F-8782-AAC52ED5508D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cayd.Test.Generators.Test.Unit", "test\UnitTests\Cayd.Test.Generators.Test.Unit\Cayd.Test.Generators.Test.Unit.csproj", "{EAF81B26-8FCA-40FC-AF48-79035825F41D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cayd.Test.Generators.Test.Unit", "test\UnitTests\Cayd.Test.Generators.Test.Unit\Cayd.Test.Generators.Test.Unit.csproj", "{EAF81B26-8FCA-40FC-AF48-79035825F41D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{E2E39C34-71A6-467E-AD2B-C462F6115F55}"
+	ProjectSection(SolutionItems) = preProject
+		assets\nuget-logo.png = assets\nuget-logo.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
