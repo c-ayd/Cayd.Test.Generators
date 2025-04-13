@@ -2,74 +2,75 @@
 {
     public class DateTimeGeneratorTest
     {
-        [Fact]
-        public void GenerateNow_WhenTimeZoneIsUtc_ShouldReturnUtcNow()
+        [Theory]
+        [InlineData(DateTimeGenerator.ETimeZone.UTC)]
+        [InlineData(DateTimeGenerator.ETimeZone.Local)]
+        public void GenerateNow_WhenTimeZoneIsGiven_ShouldReturnDateTimeAccordingly(DateTimeGenerator.ETimeZone timeZone)
         {
             // Act
-            var result = DateTimeGenerator.GenerateNow(DateTimeGenerator.ETimeZone.UTC);
+            var result = DateTimeGenerator.GenerateNow(timeZone);
 
             // Assert
-            var difference = (result - DateTime.UtcNow);
-            Assert.True(difference.TotalSeconds <= 5, "Result is later than UTC now by more than 5 seconds");
+            var difference = (result - (timeZone == DateTimeGenerator.ETimeZone.UTC ? DateTime.UtcNow : DateTime.Now));
+            Assert.True(difference.TotalSeconds <= 5, $"Time Zone: {timeZone}. Result is later than the time zone now by more than 5 seconds");
         }
 
-        [Fact]
-        public void GenerateNow_WhenTimeZoneIsLocal_ShouldReturnLocalNow()
+        [Theory]
+        [InlineData(DateTimeGenerator.ETimeZone.UTC)]
+        [InlineData(DateTimeGenerator.ETimeZone.Local)]
+        public void GenerateBefore_WhenTimeZoneIsGiven_ShouldReturnPastTimeAccordingly(DateTimeGenerator.ETimeZone timeZone)
         {
             // Act
-            var result = DateTimeGenerator.GenerateNow(DateTimeGenerator.ETimeZone.Local);
+            var result = DateTimeGenerator.GenerateBefore(timeZone);
 
             // Assert
-            var difference = (result - DateTime.Now);
-            Assert.True(difference.TotalSeconds <= 5, "Result is later than local now by more than 5 seconds");
+            var dateTime = timeZone == DateTimeGenerator.ETimeZone.UTC ? DateTime.UtcNow : DateTime.Now;
+            var difference = (dateTime - result);
+            Assert.True(dateTime.CompareTo(result) > 0, $"Time Zone: {timeZone}. Result is not earlier than the time zone now");
         }
 
-        [Fact]
-        public void GenerateBefore_WhenTimeZoneIsUtcAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingToUtc()
+        [Theory]
+        [InlineData(DateTimeGenerator.ETimeZone.UTC)]
+        [InlineData(DateTimeGenerator.ETimeZone.Local)]
+        public void GenerateBefore_WhenTimeZoneIsGivenAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingly(DateTimeGenerator.ETimeZone timeZone)
         {
             // Act
-            var result = DateTimeGenerator.GenerateBefore(DateTimeGenerator.ETimeZone.UTC, TimeSpan.FromDays(1));
+            var result = DateTimeGenerator.GenerateBefore(timeZone, TimeSpan.FromDays(1));
 
             // Assert
-            var difference = (DateTime.UtcNow - result);
-            Assert.True(DateTime.UtcNow.CompareTo(result) > 0, "Result is not earlier than UTC now");
-            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, "There is not a day difference between the two dates.");
+            var dateTime = timeZone == DateTimeGenerator.ETimeZone.UTC ? DateTime.UtcNow : DateTime.Now;
+            var difference = (dateTime - result);
+            Assert.True(dateTime.CompareTo(result) > 0, $"Time Zone: {timeZone}. Result is not earlier than the time zone now");
+            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, $"Time Zone: {timeZone}. There is not a day difference between the two dates.");
         }
 
-        [Fact]
-        public void GenerateBefore_WhenTimeZoneIsLocalAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingToUtc()
+        [Theory]
+        [InlineData(DateTimeGenerator.ETimeZone.UTC)]
+        [InlineData(DateTimeGenerator.ETimeZone.Local)]
+        public void GenerateAfter_WhenTimeZoneIsGiven_ShouldReturnPastTimeAccordingly(DateTimeGenerator.ETimeZone timeZone)
         {
             // Act
-            var result = DateTimeGenerator.GenerateBefore(DateTimeGenerator.ETimeZone.Local, TimeSpan.FromDays(1));
+            var result = DateTimeGenerator.GenerateBefore(timeZone);
 
             // Assert
-            var difference = (DateTime.Now - result);
-            Assert.True(DateTime.Now.CompareTo(result) > 0, "Result is not earlier than UTC now");
-            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, "There is not a day difference between the two dates.");
+            var dateTime = timeZone == DateTimeGenerator.ETimeZone.UTC ? DateTime.UtcNow : DateTime.Now;
+            var difference = (dateTime - result);
+            Assert.True(dateTime.CompareTo(result) > 0, $"Time Zone: {timeZone}. Result is not later than the time zone now");
         }
 
-        [Fact]
-        public void GenerateAfter_WhenTimeZoneIsUtcAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingToUtc()
+        [Theory]
+        [InlineData(DateTimeGenerator.ETimeZone.UTC)]
+        [InlineData(DateTimeGenerator.ETimeZone.Local)]
+        public void GenerateAfter_WhenTimeZoneIsGivenAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingly(DateTimeGenerator.ETimeZone timeZone)
         {
             // Act
-            var result = DateTimeGenerator.GenerateAfter(DateTimeGenerator.ETimeZone.UTC, TimeSpan.FromDays(1));
+            var result = DateTimeGenerator.GenerateAfter(timeZone, TimeSpan.FromDays(1));
 
             // Assert
-            var difference = (result - DateTime.UtcNow);
-            Assert.True(DateTime.UtcNow.CompareTo(result) < 0, "Result is not later than UTC now");
-            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, "There is not a day difference between the two dates.");
-        }
-
-        [Fact]
-        public void GenerateAfter_WhenTimeZoneIsLocalAndOneDayShiftIsGiven_ShouldReturnPastTimeAccordingToUtc()
-        {
-            // Act
-            var result = DateTimeGenerator.GenerateAfter(DateTimeGenerator.ETimeZone.Local, TimeSpan.FromDays(1));
-
-            // Assert
-            var difference = (result - DateTime.Now);
-            Assert.True(DateTime.Now.CompareTo(result) < 0, "Result is not later than UTC now");
-            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, "There is not a day difference between the two dates.");
+            var dateTime = timeZone == DateTimeGenerator.ETimeZone.UTC ? DateTime.UtcNow : DateTime.Now;
+            var difference = (result - dateTime);
+            Assert.True(dateTime.CompareTo(result) < 0, $"Time Zone: {timeZone}. Result is not later than the time zone now");
+            Assert.True(difference.TotalSeconds > 86399 && difference.TotalSeconds < 86405, $"Time Zone: {timeZone}. There is not a day difference between the two dates.");
         }
     }
 }
