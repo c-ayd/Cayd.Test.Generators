@@ -7,7 +7,7 @@ namespace Cayd.Test.Generators
         /// <summary>
         /// Generates a random time span between -7 and 7 days, including hours, minutes, seconds and milliseconds.
         /// </summary>
-        /// <returns>Returns a random time span.</returns>
+        /// <returns>Returns a random time span that can be positive or negative.</returns>
         public static TimeSpan Generate()
         {
             var timeSpan = new TimeSpan(
@@ -41,7 +41,7 @@ namespace Cayd.Test.Generators
         /// Generates a random time span based on a time limit including days, hours, minutes, seconds and milliseconds.
         /// </summary>
         /// <param name="timeLimit">Limit of the time span. If a limit is not specified for a specific time unit, the time unit is always 0.</param>
-        /// <returns>Returns a random time span.</returns>
+        /// <returns>Returns a random time span that can be positive or negative.</returns>
         public static TimeSpan GenerateWithLimit(TimeLimit timeLimit)
         {
             var timeSpan = new TimeSpan(
