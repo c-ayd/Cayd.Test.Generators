@@ -9,7 +9,7 @@
     <Version>1.0.0</Version>
     <Authors>Cemal A. Aydeniz</Authors>
     <Product>Cayd.Test.Generators to generate values and classes for tests</Product>
-    <Description>A utility library for tests that simplifies the generation of variables and classes</Description>
+    <Description>A utility library for tests that simplifies the generation of variables, classes and collections</Description>
     <PackageProjectUrl>https://github.com/c-ayd/Cayd.Test.Generators</PackageProjectUrl>
     <PackageIcon>nuget-logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
