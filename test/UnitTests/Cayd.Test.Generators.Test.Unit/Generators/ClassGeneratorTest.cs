@@ -66,15 +66,21 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.True(result.TestIntClassIDictionary.Count >= 3 && result.TestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.TestIntClassIDictionary.Count}");
 
             Assert.NotNull(result.TestIntList);             // Lists
-            Assert.True(result.TestIntList.Count >= 3 && result.TestIntList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestIntList.Count}");
+            Assert.True(result.TestIntList.Count >= 3 && result.TestIntList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestIntList.Count}");
             Assert.NotNull(result.TestStringList);
-            Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestStringList.Count}");
+            Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestStringList.Count}");
             Assert.NotNull(result.TestClassList);
-            Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassList.Count}");
+            Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassList.Count}");
             Assert.NotNull(result.TestClassCollection);
-            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassCollection.Count}");
+            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassCollection.Count}");
             Assert.NotNull(result.TestClassEnumerable);
-            Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassEnumerable.Count()}");
+            Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassEnumerable.Count()}");
+            Assert.NotNull(result.TestQueue);
+            Assert.True(result.TestQueue.Count() >= 3 && result.TestQueue.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestQueue.Count()}");
+            Assert.NotNull(result.TestStack);
+            Assert.True(result.TestStack.Count() >= 3 && result.TestStack.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestStack.Count()}");
+            Assert.NotNull(result.TestHashSet);
+            Assert.True(result.TestHashSet.Count() >= 3 && result.TestHashSet.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestHashSet.Count()}");
         }
 
         [Fact]
@@ -210,6 +216,9 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             public List<TestMemberClass>? TestClassList { get; set; } = null;
             public ICollection<TestMemberClass>? TestClassCollection { get; set; } = null;
             public IEnumerable<TestMemberClass>? TestClassEnumerable { get; set; } = null;
+            public Queue<TestMemberClass>? TestQueue { get; set; } = null;
+            public Stack<TestMemberClass>? TestStack { get; set; } = null;
+            public HashSet<TestMemberClass>? TestHashSet { get; set; } = null;
         }
 
         private enum ETestEnum

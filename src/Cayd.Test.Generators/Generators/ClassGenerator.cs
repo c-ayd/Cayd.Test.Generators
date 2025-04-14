@@ -92,7 +92,7 @@ namespace Cayd.Test.Generators
                     if (propertyType.IsArray)
                     {
                         var arrayType = propertyType.GetElementType()!;
-                        var array = Array.CreateInstance(arrayType, System.Random.Shared.NextInt(minCollectionLength, maxCollectionLength));
+                        var array = Array.CreateInstance(arrayType, System.Random.Shared.NextInt(minCollectionCount, maxCollectionCount));
 
                         for (int i = 0; i < array.Length; ++i)
                         {
@@ -123,85 +123,28 @@ namespace Cayd.Test.Generators
                     if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>)) || 
                         (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>))))
                     {
-                        var keyType = propertyType.GenericTypeArguments[0];
-                        var valueType = propertyType.GenericTypeArguments[1];
-                        var dictionaryType = !propertyType.IsInterface ? propertyType :
-                            typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
-                        
-                        var dictionary = Activator.CreateInstance(dictionaryType);
-
-                        int count = System.Random.Shared.NextInt(minCollectionLength, maxCollectionLength);
-                        var addMethod = dictionaryType.GetMethod("Add")!;
-                        for (int i = 0; i < count; ++i)
-                        {
-                            object generatedKey;
-                            if (keyType == typeof(string) || keyType.IsValueType)
-                            {
-                                generatedKey = GeneratePrimitiveType(keyType);
-                            }
-                            else
-                            {
-                                var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(keyType);
-                                var funcType = typeof(Func<,>).MakeGenericType(keyType, typeof(object));
-                                var expressionType = typeof(Expression<>).MakeGenericType(funcType);
-                                var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
-
-                                generatedKey = generateMethod.Invoke(null, new object[] { methodParameter })!;
-                            }
-
-                            object generatedValue;
-                            if (valueType == typeof(string) || valueType.IsValueType)
-                            {
-                                generatedValue = GeneratePrimitiveType(valueType);
-                            }
-                            else
-                            {
-                                var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(valueType);
-                                var funcType = typeof(Func<,>).MakeGenericType(valueType, typeof(object));
-                                var expressionType = typeof(Expression<>).MakeGenericType(funcType);
-                                var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
-
-                                generatedValue = generateMethod.Invoke(null, new object[] { methodParameter })!;
-                            }
-
-                            addMethod.Invoke(dictionary, new object[] { generatedKey, generatedValue });
-                        }
-
+                        var dictionary = DictionaryGenerator.Generate(propertyType.GenericTypeArguments[0], propertyType.GenericTypeArguments[1], minCollectionCount, maxCollectionCount);
                         propertyInfo.SetValue(instance, dictionary);
                         continue;
                     }
                     if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)) ||
                         (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
                     {
-                        var elementType = propertyType.GenericTypeArguments[0];
-                        var collectionType = !propertyType.IsInterface ? propertyType :
-                            typeof(List<>).MakeGenericType(elementType);
+                        var enumerable = EnumerableGenerator.Generate(propertyType.GenericTypeArguments[0], minCollectionCount, maxCollectionCount);
 
-                        var collection = Activator.CreateInstance(collectionType);
-
-                        int count = System.Random.Shared.NextInt(minCollectionLength, maxCollectionLength);
-                        var addMethod = collectionType.GetMethod("Add")!;
-                        for (int i = 0; i < count; ++i)
+                        var propertyGenericTypeDef = propertyType.GetGenericTypeDefinition();
+                        if (propertyGenericTypeDef == typeof(Queue<>) || 
+                            propertyGenericTypeDef == typeof(Stack<>) || 
+                            propertyGenericTypeDef == typeof(HashSet<>))
                         {
-                            object generatedElement;
-                            if (elementType == typeof(string) || elementType.IsValueType)
-                            {
-                                generatedElement = GeneratePrimitiveType(elementType);
-                            }
-                            else
-                            {
-                                var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(elementType);
-                                var funcType = typeof(Func<,>).MakeGenericType(elementType, typeof(object));
-                                var expressionType = typeof(Expression<>).MakeGenericType(funcType);
-                                var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
-
-                                generatedElement = generateMethod.Invoke(null, new object[] { methodParameter })!;
-                            }
-
-                            addMethod.Invoke(collection, new object[] { generatedElement });
+                            var propertyGenericType = propertyGenericTypeDef.MakeGenericType(propertyType.GenericTypeArguments[0]);
+                            propertyInfo.SetValue(instance, Activator.CreateInstance(propertyGenericType, new object[] { enumerable }));
+                        }
+                        else
+                        {
+                            propertyInfo.SetValue(instance, enumerable);
                         }
 
-                        propertyInfo.SetValue(instance, collection);
                         continue;
                     }
 
@@ -224,7 +167,7 @@ namespace Cayd.Test.Generators
             return (T)instance!;
         }
 
-        private static object GeneratePrimitiveType(Type type)
+        internal static object GeneratePrimitiveType(Type type)
         {
             if (type == typeof(bool)) return GenerateBool();
             else if (type == typeof(sbyte)) return GenerateSByte();
@@ -272,8 +215,8 @@ namespace Cayd.Test.Generators
             maxStringLength = maxLength;
         }
 
-        private static int minCollectionLength = 3;
-        private static int maxCollectionLength = 6;
+        private static int minCollectionCount = 3;
+        private static int maxCollectionCount = 6;
         /// <summary>
         /// Sets the default count range for the collections that are generated. Setting the range affects <see cref="ClassGenerator"/> globally.
         /// </summary>
@@ -287,8 +230,8 @@ namespace Cayd.Test.Generators
             if (maxCount < minCount)
                 throw new ArgumentOutOfRangeException(nameof(maxCount), maxCount, $"The maximum count must be equal to or greater than the given minimum count: {minCount}.");
 
-            minCollectionLength = minCount;
-            maxStringLength = maxCount;
+            minCollectionCount = minCount;
+            maxCollectionCount = maxCount;
         }
 
         /// <summary>
