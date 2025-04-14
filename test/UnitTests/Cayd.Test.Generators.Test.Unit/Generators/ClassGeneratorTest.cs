@@ -13,50 +13,90 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             // Assert
             Assert.NotNull(result);
 
-            Assert.NotNull(result.TestBaseInt);             // Property from base class
+            /** Nullable Properties */
+            Assert.NotNull(result.NullableTestBaseInt);             // Property from base class
             
-            Assert.NotNull(result.TestBool);                // Bool
+            Assert.NotNull(result.NullableTestBool);                // Bool
 
-            Assert.NotNull(result.TestSByte);               // Numbers
-            Assert.NotNull(result.TestByte);
-            Assert.NotNull(result.TestShort);
-            Assert.NotNull(result.TestUShort);
-            Assert.NotNull(result.TestInt);
-            Assert.NotNull(result.TestUInt);
-            Assert.NotNull(result.TestLong);
-            Assert.NotNull(result.TestULong);
-            Assert.NotNull(result.TestFloat);
-            Assert.NotNull(result.TestDouble);
-            Assert.NotNull(result.TestDecimal);
+            Assert.NotNull(result.NullableTestSByte);               // Numbers
+            Assert.NotNull(result.NullableTestByte);
+            Assert.NotNull(result.NullableTestShort);
+            Assert.NotNull(result.NullableTestUShort);
+            Assert.NotNull(result.NullableTestInt);
+            Assert.NotNull(result.NullableTestUInt);
+            Assert.NotNull(result.NullableTestLong);
+            Assert.NotNull(result.NullableTestULong);
+            Assert.NotNull(result.NullableTestFloat);
+            Assert.NotNull(result.NullableTestDouble);
+            Assert.NotNull(result.NullableTestDecimal);
 
-            Assert.NotNull(result.TestString);              // String
+            Assert.NotNull(result.NullableTestString);              // String
+            Assert.True(result.NullableTestString.Length >= 5 && result.NullableTestString.Length <= 10, $"String length is not between 5 and 10. Length: {result.NullableTestString.Length}");
+
+            Assert.NotNull(result.NullableTestDateTime);            // Date time
+
+            Assert.NotNull(result.NullableTestGuid);                // Guid
+
+            Assert.NotNull(result.NullableTestTimeSpan);            // Time span
+
+            Assert.NotNull(result.NullableTestEnum);                // Enum
+
+            Assert.Null(result.NullableTestStruct);                 // Struct
+
+            Assert.NotNull(result.NullableTestMemberClass);         // Class
+
+            Assert.NotNull(result.NullableTestIntArray);            // Arrays
+            Assert.True(result.NullableTestIntArray.Length >= 3 && result.NullableTestIntArray.Length <= 5, $"Int array length is not between 3 and 5. Length: {result.NullableTestIntArray.Length}");
+            Assert.NotNull(result.NullableTestStringArray);
+            Assert.True(result.NullableTestStringArray.Length >= 3 && result.NullableTestStringArray.Length <= 5, $"String array length is not between 3 and 5. Length: {result.NullableTestStringArray.Length}");
+            Assert.NotNull(result.NullableTestClassArray);
+            Assert.True(result.NullableTestClassArray.Length >= 3 && result.NullableTestClassArray.Length <= 5, $"Class array length is not between 3 and 5. Length: {result.NullableTestClassArray.Length}");
+
+            Assert.NotNull(result.NullableTestIntIntDictionary);    // Dictionaries
+            Assert.True(result.NullableTestIntIntDictionary.Count >= 3 && result.NullableTestIntIntDictionary.Count <= 5, $"int-int dictionary count is not between 3 and 5. Count: {result.NullableTestIntIntDictionary.Count}");
+            Assert.NotNull(result.NullableTestStringStringDictionary);
+            Assert.True(result.NullableTestStringStringDictionary.Count >= 3 && result.NullableTestStringStringDictionary.Count <= 5, $"string-string dictionary count is not between 3 and 5. Count: {result.NullableTestStringStringDictionary.Count}");
+            Assert.NotNull(result.NullableTestClassClassDictionary);
+            Assert.True(result.NullableTestClassClassDictionary.Count >= 3 && result.NullableTestClassClassDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.NullableTestClassClassDictionary.Count}");
+            Assert.NotNull(result.NullableTestIntClassIDictionary);
+            Assert.True(result.NullableTestIntClassIDictionary.Count >= 3 && result.NullableTestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.NullableTestIntClassIDictionary.Count}");
+
+            Assert.NotNull(result.NullableTestIntList);             // Lists
+            Assert.True(result.NullableTestIntList.Count >= 3 && result.NullableTestIntList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestIntList.Count}");
+            Assert.NotNull(result.NullableTestStringList);
+            Assert.True(result.NullableTestStringList.Count >= 3 && result.NullableTestStringList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestStringList.Count}");
+            Assert.NotNull(result.NullableTestClassList);
+            Assert.True(result.NullableTestClassList.Count >= 3 && result.NullableTestClassList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassList.Count}");
+            Assert.NotNull(result.NullableTestClassEnumerable);
+            Assert.True(result.NullableTestClassEnumerable.Count() >= 3 && result.NullableTestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassEnumerable.Count()}");
+            Assert.NotNull(result.NullableTestClassCollection);
+            Assert.True(result.NullableTestClassCollection.Count >= 3 && result.NullableTestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassCollection.Count}");
+            Assert.NotNull(result.NullableTestQueue);
+            Assert.True(result.NullableTestQueue.Count() >= 3 && result.NullableTestQueue.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestQueue.Count()}");
+            Assert.NotNull(result.NullableTestStack);
+            Assert.True(result.NullableTestStack.Count() >= 3 && result.NullableTestStack.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestStack.Count()}");
+            Assert.NotNull(result.NullableTestHashSet);
+            Assert.True(result.NullableTestHashSet.Count() >= 3 && result.NullableTestHashSet.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestHashSet.Count()}");
+
+            /** Non-nullable Properties */
+            Assert.False(string.IsNullOrEmpty(result.TestString), "TestString is null or empty."); // String
             Assert.True(result.TestString.Length >= 5 && result.TestString.Length <= 10, $"String length is not between 5 and 10. Length: {result.TestString.Length}");
 
-            Assert.NotNull(result.TestDateTime);            // Date time
+            Assert.Null(result.TestStruct.TestValue1);                // Struct
+            Assert.True(string.IsNullOrEmpty(result.TestStruct.TestValue2), $"TestStruct1.TestValue2 is not null or empty: {result.TestStruct.TestValue2}");
+            Assert.True(string.IsNullOrEmpty(result.TestStruct.testValue3), $"TestStruct1.testValue3 is not null or empty: {result.TestStruct.testValue3}");
+            Assert.True(result.TestStruct.testValue4 == 0, $"TestStruct1.testValue3 is not 0: {result.TestStruct.testValue4}");
 
-            Assert.NotNull(result.TestGuid);                // Guid
+            Assert.NotNull(result.TestMemberClass);                   // Class
 
-            Assert.NotNull(result.TestTimeSpan);            // Time span
-
-            Assert.NotNull(result.TestEnum);                // Enum
-
-            Assert.Null(result.TestStruct1);                // Nullable struct
-
-            Assert.Null(result.TestStruct2.TestValue1);     // Struct
-            Assert.True(string.IsNullOrEmpty(result.TestStruct2.TestValue2), $"TestStruct1.TestValue2 is not null or empty: {result.TestStruct2.TestValue2}");
-            Assert.True(string.IsNullOrEmpty(result.TestStruct2.testValue3), $"TestStruct1.testValue3 is not null or empty: {result.TestStruct2.testValue3}");
-            Assert.True(result.TestStruct2.testValue4 == 0, $"TestStruct1.testValue3 is not 0: {result.TestStruct2.testValue4}");
-
-            Assert.NotNull(result.TestMemberClass);         // Class
-
-            Assert.NotNull(result.TestIntArray);            // Arrays
+            Assert.NotNull(result.TestIntArray);                      // Arrays
             Assert.True(result.TestIntArray.Length >= 3 && result.TestIntArray.Length <= 5, $"Int array length is not between 3 and 5. Length: {result.TestIntArray.Length}");
             Assert.NotNull(result.TestStringArray);
             Assert.True(result.TestStringArray.Length >= 3 && result.TestStringArray.Length <= 5, $"String array length is not between 3 and 5. Length: {result.TestStringArray.Length}");
             Assert.NotNull(result.TestClassArray);
             Assert.True(result.TestClassArray.Length >= 3 && result.TestClassArray.Length <= 5, $"Class array length is not between 3 and 5. Length: {result.TestClassArray.Length}");
 
-            Assert.NotNull(result.TestIntIntDictionary);    // Dictionaries
+            Assert.NotNull(result.TestIntIntDictionary);              // Dictionaries
             Assert.True(result.TestIntIntDictionary.Count >= 3 && result.TestIntIntDictionary.Count <= 5, $"int-int dictionary count is not between 3 and 5. Count: {result.TestIntIntDictionary.Count}");
             Assert.NotNull(result.TestStringStringDictionary);
             Assert.True(result.TestStringStringDictionary.Count >= 3 && result.TestStringStringDictionary.Count <= 5, $"string-string dictionary count is not between 3 and 5. Count: {result.TestStringStringDictionary.Count}");
@@ -65,16 +105,16 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.NotNull(result.TestIntClassIDictionary);
             Assert.True(result.TestIntClassIDictionary.Count >= 3 && result.TestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.TestIntClassIDictionary.Count}");
 
-            Assert.NotNull(result.TestIntList);             // Lists
+            Assert.NotNull(result.TestIntList);                       // Lists
             Assert.True(result.TestIntList.Count >= 3 && result.TestIntList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestIntList.Count}");
             Assert.NotNull(result.TestStringList);
             Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestStringList.Count}");
             Assert.NotNull(result.TestClassList);
             Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassList.Count}");
-            Assert.NotNull(result.TestClassCollection);
-            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassCollection.Count}");
             Assert.NotNull(result.TestClassEnumerable);
             Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassEnumerable.Count()}");
+            Assert.NotNull(result.TestClassCollection);
+            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassCollection.Count}");
             Assert.NotNull(result.TestQueue);
             Assert.True(result.TestQueue.Count() >= 3 && result.TestQueue.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestQueue.Count()}");
             Assert.NotNull(result.TestStack);
@@ -110,7 +150,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
                 (x => x.TestGuid, () => guidValue),
                 (x => x.TestTimeSpan, () => timeSpanValue),
                 (x => x.TestEnum, () => ETestEnum.State150),
-                (x => x.TestStruct2, () => new TestStruct()
+                (x => x.TestStruct, () => new TestStruct()
                 { 
                     TestValue1 = ReturnOneString(), 
                     TestValue2 = "2", 
@@ -138,17 +178,17 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             Assert.Equal(1, result.TestBaseInt);                    // Property from base class
 
-            Assert.Equal((sbyte)1, result.TestSByte!.Value);        // Numbers
-            Assert.Equal((byte)1, result.TestByte!.Value);
-            Assert.Equal((short)1, result.TestShort!.Value);
-            Assert.Equal((ushort)1, result.TestUShort!.Value);
-            Assert.Equal(1, result.TestInt!.Value);
-            Assert.Equal(1u, result.TestUInt!.Value);
-            Assert.Equal(1L, result.TestLong!.Value);
-            Assert.Equal(1uL, result.TestULong!.Value);
-            Assert.Equal(1.0f, result.TestFloat!.Value);
-            Assert.Equal(1.0, result.TestDouble!.Value);
-            Assert.Equal(1.0m, result.TestDecimal!.Value);
+            Assert.Equal((sbyte)1, result.TestSByte);               // Numbers
+            Assert.Equal((byte)1, result.TestByte);
+            Assert.Equal((short)1, result.TestShort);
+            Assert.Equal((ushort)1, result.TestUShort);
+            Assert.Equal(1, result.TestInt);
+            Assert.Equal(1u, result.TestUInt);
+            Assert.Equal(1L, result.TestLong);
+            Assert.Equal(1uL, result.TestULong);
+            Assert.Equal(1.0f, result.TestFloat);
+            Assert.Equal(1.0, result.TestDouble);
+            Assert.Equal(1.0m, result.TestDecimal);
 
             Assert.Equal("1", result.TestString);                   // String
 
@@ -156,14 +196,14 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             Assert.Equal(guidValue, result.TestGuid);               // Guid
 
-            Assert.Equal(timeSpanValue.TotalSeconds, result.TestTimeSpan!.Value.TotalSeconds); // Time span
+            Assert.Equal(timeSpanValue.TotalSeconds, result.TestTimeSpan.TotalSeconds); // Time span
 
             Assert.Equal(ETestEnum.State150, result.TestEnum);      // Enum
 
-            Assert.Equal("1", result.TestStruct2.TestValue1);       // Struct
-            Assert.Equal("2", result.TestStruct2.TestValue2);
-            Assert.Equal("3", result.TestStruct2.testValue3);
-            Assert.Equal(1, result.TestStruct2.testValue4);
+            Assert.Equal("1", result.TestStruct.TestValue1);        // Struct
+            Assert.Equal("2", result.TestStruct.TestValue2);
+            Assert.Equal("3", result.TestStruct.testValue3);
+            Assert.Equal(1, result.TestStruct.testValue4);
 
             Assert.Equal(dateTimeValue, result.TestMemberClass!.TestDateTime); // Class
             Assert.Equal(ETestEnum.State4, result.TestMemberClass.TestEnum);
@@ -179,46 +219,81 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
         private class TestClassBase
         {
-            public int? TestBaseInt { get; set; }
+            public int? NullableTestBaseInt { get; set; }
+            public int TestBaseInt { get; set; }
         }
 
         private class TestClass : TestClassBase
         {
-            public bool? TestBool { get; set; } = null;
-            public sbyte? TestSByte { get; set; } = null;
-            public byte? TestByte { get; set; } = null;
-            public short? TestShort { get; set; } = null;
-            public ushort? TestUShort { get; set; } = null;
-            public int? TestInt { get; set; } = null;
-            public uint? TestUInt { get; set; } = null;
-            public long? TestLong { get; set; } = null;
-            public ulong? TestULong { get; set; } = null;
-            public float? TestFloat { get; set; } = null;
-            public double? TestDouble { get; set; } = null;
-            public decimal? TestDecimal { get; set; } = null;
-            public string? TestString { get; set; } = null;
-            public DateTime? TestDateTime { get; set; } = null;
-            public Guid? TestGuid { get; set; } = null;
-            public TimeSpan? TestTimeSpan { get; set; } = null;
-            public ETestEnum? TestEnum { get; set; } = null;
-            public TestStruct? TestStruct1 { get; set; } = null;
-            public TestStruct TestStruct2 { get; set; }
-            public TestMemberClass? TestMemberClass { get; set; } = null;
-            public int[]? TestIntArray { get; set; } = null;
-            public string[]? TestStringArray { get; set; } = null;
-            public TestMemberClass[]? TestClassArray { get; set; } = null;
-            public Dictionary<int, int>? TestIntIntDictionary { get; set; } = null;
-            public Dictionary<string, string>? TestStringStringDictionary { get; set; } = null;
-            public Dictionary<TestMemberClass, TestMemberClass>? TestClassClassDictionary { get; set; } = null;
-            public IDictionary<int, TestMemberClass>? TestIntClassIDictionary { get; set; } = null;
-            public List<int>? TestIntList { get; set; } = null;
-            public List<string>? TestStringList { get; set; } = null;
-            public List<TestMemberClass>? TestClassList { get; set; } = null;
-            public ICollection<TestMemberClass>? TestClassCollection { get; set; } = null;
-            public IEnumerable<TestMemberClass>? TestClassEnumerable { get; set; } = null;
-            public Queue<TestMemberClass>? TestQueue { get; set; } = null;
-            public Stack<TestMemberClass>? TestStack { get; set; } = null;
-            public HashSet<TestMemberClass>? TestHashSet { get; set; } = null;
+            public bool? NullableTestBool { get; set; } = null;
+            public sbyte? NullableTestSByte { get; set; } = null;
+            public byte? NullableTestByte { get; set; } = null;
+            public short? NullableTestShort { get; set; } = null;
+            public ushort? NullableTestUShort { get; set; } = null;
+            public int? NullableTestInt { get; set; } = null;
+            public uint? NullableTestUInt { get; set; } = null;
+            public long? NullableTestLong { get; set; } = null;
+            public ulong? NullableTestULong { get; set; } = null;
+            public float? NullableTestFloat { get; set; } = null;
+            public double? NullableTestDouble { get; set; } = null;
+            public decimal? NullableTestDecimal { get; set; } = null;
+            public string? NullableTestString { get; set; } = null;
+            public DateTime? NullableTestDateTime { get; set; } = null;
+            public Guid? NullableTestGuid { get; set; } = null;
+            public TimeSpan? NullableTestTimeSpan { get; set; } = null;
+            public ETestEnum? NullableTestEnum { get; set; } = null;
+            public TestStruct? NullableTestStruct { get; set; } = null;
+            public TestMemberClass? NullableTestMemberClass { get; set; } = null;
+            public int[]? NullableTestIntArray { get; set; } = null;
+            public string[]? NullableTestStringArray { get; set; } = null;
+            public TestMemberClass[]? NullableTestClassArray { get; set; } = null;
+            public Dictionary<int, int>? NullableTestIntIntDictionary { get; set; } = null;
+            public Dictionary<string, string>? NullableTestStringStringDictionary { get; set; } = null;
+            public Dictionary<TestMemberClass, TestMemberClass>? NullableTestClassClassDictionary { get; set; } = null;
+            public IDictionary<int, TestMemberClass>? NullableTestIntClassIDictionary { get; set; } = null;
+            public List<int>? NullableTestIntList { get; set; } = null;
+            public List<string>? NullableTestStringList { get; set; } = null;
+            public List<TestMemberClass>? NullableTestClassList { get; set; } = null;
+            public IEnumerable<TestMemberClass>? NullableTestClassEnumerable { get; set; } = null;
+            public ICollection<TestMemberClass>? NullableTestClassCollection { get; set; } = null;
+            public Queue<TestMemberClass>? NullableTestQueue { get; set; } = null;
+            public Stack<TestMemberClass>? NullableTestStack { get; set; } = null;
+            public HashSet<TestMemberClass>? NullableTestHashSet { get; set; } = null;
+
+            public bool TestBool { get; set; }
+            public sbyte TestSByte { get; set; }
+            public byte TestByte { get; set; }
+            public short TestShort { get; set; }
+            public ushort TestUShort { get; set; }
+            public int TestInt { get; set; }
+            public uint TestUInt { get; set; }
+            public long TestLong { get; set; }
+            public ulong TestULong { get; set; }
+            public float TestFloat { get; set; }
+            public double TestDouble { get; set; }
+            public decimal TestDecimal { get; set; }
+            public string TestString { get; set; }
+            public DateTime TestDateTime { get; set; }
+            public Guid TestGuid { get; set; }
+            public TimeSpan TestTimeSpan { get; set; }
+            public ETestEnum TestEnum { get; set; }
+            public TestStruct TestStruct { get; set; }
+            public TestMemberClass TestMemberClass { get; set; }
+            public int[] TestIntArray { get; set; }
+            public string[] TestStringArray { get; set; }
+            public TestMemberClass[] TestClassArray { get; set; }
+            public Dictionary<int, int> TestIntIntDictionary { get; set; }
+            public Dictionary<string, string> TestStringStringDictionary { get; set; }
+            public Dictionary<TestMemberClass, TestMemberClass> TestClassClassDictionary { get; set; }
+            public IDictionary<int, TestMemberClass> TestIntClassIDictionary { get; set; }
+            public List<int> TestIntList { get; set; }
+            public List<string> TestStringList { get; set; }
+            public List<TestMemberClass> TestClassList { get; set; }
+            public IEnumerable<TestMemberClass> TestClassEnumerable { get; set; }
+            public ICollection<TestMemberClass> TestClassCollection { get; set; }
+            public Queue<TestMemberClass> TestQueue { get; set; }
+            public Stack<TestMemberClass> TestStack { get; set; }
+            public HashSet<TestMemberClass> TestHashSet { get; set; }
         }
 
         private enum ETestEnum
