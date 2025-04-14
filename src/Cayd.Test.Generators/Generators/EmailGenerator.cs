@@ -12,7 +12,7 @@ namespace Cayd.Test.Generators
             => GenerateEmail(System.Random.Shared.Next(5, 11), System.Random.Shared.Next(5, 11), 3);
 
         /// <summary>
-        /// Generates a random email based on provided lengths. If any parameter is skipped, the skipped ones' lengths are the defaults, which is as same as <see cref="Generate"/>.
+        /// Generates a random email based on provided lengths. If any parameter is skipped, the skipped ones' lengths are the defaults, which is the same as <see cref="Generate"/>.
         /// </summary>
         /// <param name="localPartLength">Length of the local part of the email.</param>
         /// <param name="domainPartLength">Length of the domain part of the email.</param>

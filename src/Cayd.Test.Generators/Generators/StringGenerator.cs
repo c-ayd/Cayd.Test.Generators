@@ -26,10 +26,11 @@ namespace Cayd.Test.Generators
         /// <summary>
         /// Generates a random string using custom characters.
         /// </summary>
+        /// <param name="chars">Characters of the string.</param>
         /// <param name="length">Length of the string.</param>
         /// <returns>Returns a random string containing only the given characters.</returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string GenerateUsingCustomChars(List<char> chars, int length)
+        public static string GenerateUsingCustomChars(IEnumerable<char> chars, int length)
             => GenerateString(chars, length);
 
         /// <summary>
@@ -56,28 +57,34 @@ namespace Cayd.Test.Generators
         /// Generates a random string using custom characters with a format.
         /// </summary>
         /// <param name="format">Format to generate string. Example: "Hello, {0}. Welcome back!"</param>
+        /// <param name="chars">Characters of the string.</param>
         /// <param name="parameterLengths">Length of the parameters in the format. Pass only one length if all parameters need to be the same length. Otherwise, the number of lengths must match with the number of the parameters.</param>
         /// <returns>Returns a random string containing only the given characters.</returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string GenerateUsingCustomCharsWithFormat(string format, List<char> chars, params int[] parameterLengths)
+        public static string GenerateUsingCustomCharsWithFormat(string format, IEnumerable<char> chars, params int[] parameterLengths)
             => GenerateStringWithFormat(format, chars, parameterLengths);
 
-        private static string GenerateString(List<char> chars, int length)
+        private static string GenerateString(IEnumerable<char>? chars, int length)
         {
-            if (chars == null || chars.Count == 0)
+            int? count = chars?.Count();
+            if (count == null || count.Value == 0)
                 throw new ArgumentException("The character set is empty.", nameof(chars));
 
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < length; i++)
             {
-                builder.Append(chars[System.Random.Shared.Next(0, chars.Count)]);
+                builder.Append(chars!.ElementAt(System.Random.Shared.Next(0, count.Value)));
             }
 
             return builder.ToString();
         }
 
-        private static string GenerateStringWithFormat(string format, List<char> chars, params int[] parameterLengths)
+        private static string GenerateStringWithFormat(string format, IEnumerable<char>? chars, params int[] parameterLengths)
         {
+            int? count = chars?.Count();
+            if (count == null || count.Value == 0)
+                throw new ArgumentException("The character set is empty.", nameof(chars));
+
             Regex regex = new Regex("{.*?}");
             int numOfParameters = regex.Matches(format).Count;
             if (numOfParameters == 0)
@@ -95,7 +102,7 @@ namespace Cayd.Test.Generators
                 int length = parameterLengths.Length == 1 ? parameterLengths[0] : parameterLengths[i];
                 for (int j = 0; j < length; j++)
                 {
-                    builder.Append(chars[System.Random.Shared.Next(0, chars.Count)]);
+                    builder.Append(chars!.ElementAt(System.Random.Shared.Next(0, count.Value)));
                 }
 
                 parameters.Add(builder.ToString());

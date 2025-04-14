@@ -5,7 +5,7 @@ namespace Cayd.Test.Generators
     public static class IpAddressGenerator
     {
         /// <summary>
-        /// Generates a random IPv4 adress with a random class.
+        /// Generates a random IPv4 address based on a random class.
         /// </summary>
         /// <returns>Returns a random IPv4 address.</returns>
         public static string GenerateIpv4()
@@ -109,7 +109,7 @@ namespace Cayd.Test.Generators
         /// </summary>
         /// <param name="type">Type of the IPv6 address.</param>
         /// <returns>Returns a random IPv6 address based on the given type.</returns>
-        public static string GenerateIpv6WithType(Ipv6Type type)
+        public static string GenerateIpv6(Ipv6Type type)
             => _GenerateIpv6(type);
         
         /// <summary>
