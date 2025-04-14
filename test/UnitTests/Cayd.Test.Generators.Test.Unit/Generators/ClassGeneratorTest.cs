@@ -13,6 +13,8 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             // Assert
             Assert.NotNull(result);
 
+            Assert.NotNull(result.TestBaseInt);             // Property from base class
+            
             Assert.NotNull(result.TestBool);                // Bool
 
             Assert.NotNull(result.TestSByte);               // Numbers
@@ -79,6 +81,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Act
             var result = ClassGenerator.Generate(new (Expression<Func<TestClass, object?>>, Func<object?>)[] {
+                (x => x.TestBaseInt, () => 1),
                 (x => x.TestSByte, () => (sbyte)1),
                 (x => x.TestByte, () => (byte)1),
                 (x => x.TestShort, () => (short)1),
@@ -121,6 +124,8 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             // Assert
             Assert.NotNull(result);
 
+            Assert.Equal(1, result.TestBaseInt);                    // Property from base class
+
             Assert.Equal((sbyte)1, result.TestSByte!.Value);        // Numbers
             Assert.Equal((byte)1, result.TestByte!.Value);
             Assert.Equal((short)1, result.TestShort!.Value);
@@ -160,7 +165,12 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
         private string ReturnOneString() => "1";
 
-        private class TestClass
+        private class TestClassBase
+        {
+            public int? TestBaseInt { get; set; }
+        }
+
+        private class TestClass : TestClassBase
         {
             public bool? TestBool { get; set; } = null;
             public sbyte? TestSByte { get; set; } = null;
