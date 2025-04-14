@@ -19,18 +19,18 @@
         }
 
         /// <summary>
-        /// Generates a date time earlier than the current time based on the time zone.
+        /// Generates a date time earlier than the current time based on the time zone up to 7 days.
         /// </summary>
         /// <param name="timeZone">Time zone of the genertaed date.</param>
         /// <returns>Returns a date time.</returns>
-        public static DateTime GenerateBefore(ETimeZone timeZone)
+        public static DateTime GenerateBefore(ETimeZone timeZone)   
         {
             DateTime dateTime = GenerateNow(timeZone);
 
             var timeShift = TimeSpanGenerator.Generate();
             if (timeShift.CompareTo(TimeSpan.Zero) > 0)
                 return dateTime.Add(-timeShift);
-
+            
             return dateTime.Add(timeShift);
         }
 
@@ -44,7 +44,7 @@
             => GenerateNow(timeZone).Add(-timeShift);
 
         /// <summary>
-        /// Generates a date time later than the current time based on the time zone.
+        /// Generates a date time later than the current time based on the time zone up to 7 days.
         /// </summary>
         /// <param name="timeZone">Time zone of the generated date.</param>
         /// <returns>Returns a date time.</returns>
