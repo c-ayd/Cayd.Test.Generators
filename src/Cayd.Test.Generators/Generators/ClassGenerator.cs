@@ -120,14 +120,18 @@ namespace Cayd.Test.Generators
 
                     // Collection types
                     var interfaces = propertyType.GetInterfaces();
-                    if (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>)))
+                    if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>)) || 
+                        (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>))))
                     {
                         var keyType = propertyType.GenericTypeArguments[0];
                         var valueType = propertyType.GenericTypeArguments[1];
-                        var dictionary = Activator.CreateInstance(propertyType);
+                        var dictionaryType = !propertyType.IsInterface ? propertyType :
+                            typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
+                        
+                        var dictionary = Activator.CreateInstance(dictionaryType);
 
                         int count = System.Random.Shared.NextInt(minCollectionLength, maxCollectionLength);
-                        var addMethod = propertyType.GetMethod("Add")!;
+                        var addMethod = dictionaryType.GetMethod("Add")!;
                         for (int i = 0; i < count; ++i)
                         {
                             object generatedKey;
@@ -166,13 +170,17 @@ namespace Cayd.Test.Generators
                         propertyInfo.SetValue(instance, dictionary);
                         continue;
                     }
-                    if (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
+                    if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)) ||
+                        (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
                     {
                         var elementType = propertyType.GenericTypeArguments[0];
-                        var collection = Activator.CreateInstance(propertyType);
+                        var collectionType = !propertyType.IsInterface ? propertyType :
+                            typeof(List<>).MakeGenericType(elementType);
+
+                        var collection = Activator.CreateInstance(collectionType);
 
                         int count = System.Random.Shared.NextInt(minCollectionLength, maxCollectionLength);
-                        var addMethod = propertyType.GetMethod("Add")!;
+                        var addMethod = collectionType.GetMethod("Add")!;
                         for (int i = 0; i < count; ++i)
                         {
                             object generatedElement;

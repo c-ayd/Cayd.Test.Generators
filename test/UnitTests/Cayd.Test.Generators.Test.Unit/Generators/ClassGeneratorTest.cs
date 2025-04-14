@@ -62,6 +62,8 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.True(result.TestStringStringDictionary.Count >= 3 && result.TestStringStringDictionary.Count <= 5, $"string-string dictionary count is not between 3 and 5. Count: {result.TestStringStringDictionary.Count}");
             Assert.NotNull(result.TestClassClassDictionary);
             Assert.True(result.TestClassClassDictionary.Count >= 3 && result.TestClassClassDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.TestClassClassDictionary.Count}");
+            Assert.NotNull(result.TestIntClassIDictionary);
+            Assert.True(result.TestIntClassIDictionary.Count >= 3 && result.TestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.TestIntClassIDictionary.Count}");
 
             Assert.NotNull(result.TestIntList);             // Lists
             Assert.True(result.TestIntList.Count >= 3 && result.TestIntList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestIntList.Count}");
@@ -69,6 +71,10 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestStringList.Count}");
             Assert.NotNull(result.TestClassList);
             Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassList.Count}");
+            Assert.NotNull(result.TestClassCollection);
+            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassCollection.Count}");
+            Assert.NotNull(result.TestClassEnumerable);
+            Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 4. Count: {result.TestClassEnumerable.Count()}");
         }
 
         [Fact]
@@ -198,9 +204,12 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             public Dictionary<int, int>? TestIntIntDictionary { get; set; } = null;
             public Dictionary<string, string>? TestStringStringDictionary { get; set; } = null;
             public Dictionary<TestMemberClass, TestMemberClass>? TestClassClassDictionary { get; set; } = null;
+            public IDictionary<int, TestMemberClass>? TestIntClassIDictionary { get; set; } = null;
             public List<int>? TestIntList { get; set; } = null;
             public List<string>? TestStringList { get; set; } = null;
             public List<TestMemberClass>? TestClassList { get; set; } = null;
+            public ICollection<TestMemberClass>? TestClassCollection { get; set; } = null;
+            public IEnumerable<TestMemberClass>? TestClassEnumerable { get; set; } = null;
         }
 
         private enum ETestEnum
