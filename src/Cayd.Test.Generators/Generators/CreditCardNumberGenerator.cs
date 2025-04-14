@@ -39,7 +39,7 @@ namespace Cayd.Test.Generators
                 @double = !@double;
             }
 
-            int remaining = 10 - (luhn % 10);
+            int remaining = (10 - (luhn % 10)) % 10;
             builder.Append(remaining);
 
             return builder.ToString();
@@ -61,6 +61,9 @@ namespace Cayd.Test.Generators
             }
         }
 
+        /// <summary>
+        /// Use this class to create other credit card networks for the <see cref="Generate(CreditCardNetwork)"/> method.
+        /// </summary>
         public abstract class CreditCardNetwork
         {
             public abstract List<string> IINRanges { get; }

@@ -16,16 +16,16 @@
             var resultV = CreditCardNumberGenerator.Generate(visa);
 
             // Assert
-            Assert.True(ValidateCreditCardNumber(resultAE), "American Express is not valid");
-            Assert.True(ValidateCreditCardNumber(resultMC), "Master Card is not valid");
-            Assert.True(ValidateCreditCardNumber(resultV), "Visa is not valid");
+            Assert.True(ValidateCreditCardNumber(resultAE), $"American Express is not valid. Card number: {resultAE}");
+            Assert.True(ValidateCreditCardNumber(resultMC), $"Master Card is not valid. Card number: {resultMC}");
+            Assert.True(ValidateCreditCardNumber(resultV), $"Visa is not valid. Card number: {resultV}");
         }
 
         private bool ValidateCreditCardNumber(string number)
         {
             bool @double = false;
             int luhn = 0;
-            for (int i = number.Length - 1; i >= 0; --i)
+            for (int i = number.Length - 1; i >= 0 ; --i)
             {
                 int product = int.Parse(number[i].ToString()) * (@double ? 2 : 1);
                 if (product > 9)
