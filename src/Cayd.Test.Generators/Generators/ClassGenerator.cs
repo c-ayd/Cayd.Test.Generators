@@ -17,7 +17,7 @@ namespace Cayd.Test.Generators
         /// </code>
         /// Example usage 2:
         /// <code>
-        /// Generate([
+        /// Generate&lt;MyClass&gt;([
         ///     (x => x.Property1, GeneratorMethod),
         ///     (x => x.Property2, () => GeneratorMethod(param1, param2, ...)),
         ///     (x => x.Property3, () => "Exact value instead of random"),
