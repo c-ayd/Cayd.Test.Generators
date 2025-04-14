@@ -64,7 +64,7 @@
                 "1234"
             };
 
-            public override int Length { get; } = 3;
+            public override int CardNumberLength { get; } = 3;
         }
     }
 }

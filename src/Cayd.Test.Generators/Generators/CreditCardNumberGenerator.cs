@@ -15,7 +15,7 @@ namespace Cayd.Test.Generators
             StringBuilder builder = new StringBuilder()
                 .Append(network.IINRanges[System.Random.Shared.Next(0, network.IINRanges.Count)]);
 
-            int length = network.Length - builder.Length;
+            int length = network.CardNumberLength - builder.Length;
             if (length < 1)
                 throw new ArgumentException("The card's length is lower than the card's IIN range.");
 
@@ -66,8 +66,15 @@ namespace Cayd.Test.Generators
         /// </summary>
         public abstract class CreditCardNetwork
         {
+            /// <summary>
+            /// All possible IIN numbers of the networks.
+            /// </summary>
             public abstract List<string> IINRanges { get; }
-            public abstract int Length { get; }
+
+            /// <summary>
+            /// The card number's length.
+            /// </summary>
+            public abstract int CardNumberLength { get; }
         }
 
         public sealed class AmericanExpress : CreditCardNetwork
@@ -77,7 +84,7 @@ namespace Cayd.Test.Generators
                 "34", "37"
             };
 
-            public override int Length { get; } = 15;
+            public override int CardNumberLength { get; } = 15;
         }
 
         public sealed class MasterCard : CreditCardNetwork
@@ -87,7 +94,7 @@ namespace Cayd.Test.Generators
                 "2221", "2720", "51", "55"
             };
 
-            public override int Length { get; } = 16;
+            public override int CardNumberLength { get; } = 16;
         }
 
         public sealed class Visa : CreditCardNetwork
@@ -97,7 +104,7 @@ namespace Cayd.Test.Generators
                 "4"
             };
 
-            public override int Length { get; } = 16;
+            public override int CardNumberLength { get; } = 16;
         }
     }
 }
