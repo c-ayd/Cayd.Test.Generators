@@ -27,16 +27,16 @@ namespace Cayd.Test.Generators
         /// <param name="requireDigit">Whether the password requires a digit.</param>
         /// <param name="requireLowercase">Whether the password requires a lowercase character.</param>
         /// <param name="requireUppercase">Whether the password requires an uppercase character.</param>
-        /// <param name="requireNonAlphaNumeric">Whether the password requires a non-alphanumeric character</param>
+        /// <param name="requireNonAlphanumeric">Whether the password requires a non-alphanumeric character</param>
         /// <returns>Returns a random password.</returns>
         /// <exception cref="ArgumentException"></exception>
-        public static string GenerateWithCustomRules(int length, bool requireDigit, bool requireLowercase, bool requireUppercase, bool requireNonAlphaNumeric)
+        public static string GenerateWithCustomRules(int length, bool requireDigit, bool requireLowercase, bool requireUppercase, bool requireNonAlphanumeric)
         {
             int leastNumberOfCharacters = 0;
             if (requireDigit) ++leastNumberOfCharacters;
             if (requireLowercase) ++leastNumberOfCharacters;
             if (requireUppercase) ++leastNumberOfCharacters;
-            if (requireNonAlphaNumeric) ++leastNumberOfCharacters;
+            if (requireNonAlphanumeric) ++leastNumberOfCharacters;
             if (length < leastNumberOfCharacters)
                 throw new ArgumentException($"According to the rules, the least number of length should be {leastNumberOfCharacters}", nameof(length));
 
@@ -44,7 +44,7 @@ namespace Cayd.Test.Generators
             if (requireDigit) builder.Append(Digits[System.Random.Shared.Next(0, Digits.Count)]);
             if (requireLowercase) builder.Append(LowercaseCharacters[System.Random.Shared.Next(0, LowercaseCharacters.Count)]);
             if (requireUppercase) builder.Append(UppercaseCharacters[System.Random.Shared.Next(0, UppercaseCharacters.Count)]);
-            if (requireNonAlphaNumeric) builder.Append(NonAlphanumericCharacters[System.Random.Shared.Next(0, NonAlphanumericCharacters.Count)]);
+            if (requireNonAlphanumeric) builder.Append(NonAlphanumericCharacters[System.Random.Shared.Next(0, NonAlphanumericCharacters.Count)]);
 
             length -= builder.Length;
             for (int i = 0; i < length; ++i)
@@ -63,7 +63,7 @@ namespace Cayd.Test.Generators
                 if (digits == null)
                 {
                     digits = new List<char>();
-                    for (char i = '0'; i < '9'; ++i)
+                    for (char i = '0'; i <= '9'; ++i)
                         digits.Add(i);
                 }
 
@@ -79,7 +79,7 @@ namespace Cayd.Test.Generators
                 if (lowercaseCharacters == null)
                 {
                     lowercaseCharacters = new List<char>();
-                    for (char i = 'a'; i < 'z'; ++i)
+                    for (char i = 'a'; i <= 'z'; ++i)
                         lowercaseCharacters.Add(i);
                 }
 
@@ -95,7 +95,7 @@ namespace Cayd.Test.Generators
                 if (uppercaseCharacters == null)
                 {
                     uppercaseCharacters = new List<char>();
-                    for (char i = 'A'; i < 'Z'; ++i)
+                    for (char i = 'A'; i <= 'Z'; ++i)
                         uppercaseCharacters.Add(i);
                 }
 
