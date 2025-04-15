@@ -6,6 +6,15 @@ namespace Cayd.Test.Generators
     public static class StringGenerator
     {
         /// <summary>
+        /// Generates a random string using alphanumeric characters.
+        /// </summary>
+        /// <param name="length">Length of the string.</param>
+        /// <returns>Returns a random string containing only alpha numeric characters.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static string GenerateUsingAlphanumeric(int length)
+            => GenerateString(AlphanumericChars, length);
+
+        /// <summary>
         /// Generates a random string using Ascii characters.
         /// </summary>
         /// <param name="length">Length of the string.</param>
@@ -110,6 +119,26 @@ namespace Cayd.Test.Generators
             }
 
             return string.Format(format, parameters.ToArray());
+        }
+
+        private static List<char>? alphanumericChars = null;
+        private static List<char> AlphanumericChars
+        {
+            get
+            {
+                if (alphanumericChars == null)
+                {
+                    alphanumericChars = new List<char>();
+                    for (char i = '0'; i <= '9'; ++i)
+                        alphanumericChars.Add(i);
+                    for (char i = 'a'; i <= 'z'; ++i)
+                        alphanumericChars.Add(i);
+                    for (char i = 'A'; i <= 'Z'; ++i)
+                        alphanumericChars.Add(i);
+                }
+
+                return alphanumericChars;
+            }
         }
 
         private static List<char>? asciiChars = null;
