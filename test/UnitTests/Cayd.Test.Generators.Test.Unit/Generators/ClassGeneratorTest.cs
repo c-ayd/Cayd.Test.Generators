@@ -61,22 +61,24 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.NotNull(result.NullableTestIntClassIDictionary);
             Assert.True(result.NullableTestIntClassIDictionary.Count >= 3 && result.NullableTestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.NullableTestIntClassIDictionary.Count}");
 
-            Assert.NotNull(result.NullableTestIntList);             // Lists
+            Assert.NotNull(result.NullableTestIntList);             // Enumerables
             Assert.True(result.NullableTestIntList.Count >= 3 && result.NullableTestIntList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestIntList.Count}");
             Assert.NotNull(result.NullableTestStringList);
-            Assert.True(result.NullableTestStringList.Count >= 3 && result.NullableTestStringList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestStringList.Count}");
+            Assert.True(result.NullableTestStringList.Count >= 3 && result.NullableTestStringList.Count <= 5, $"String list count is not between 3 and 5. Count: {result.NullableTestStringList.Count}");
             Assert.NotNull(result.NullableTestClassList);
-            Assert.True(result.NullableTestClassList.Count >= 3 && result.NullableTestClassList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassList.Count}");
+            Assert.True(result.NullableTestClassList.Count >= 3 && result.NullableTestClassList.Count <= 5, $"Class list count is not between 3 and 5. Count: {result.NullableTestClassList.Count}");
             Assert.NotNull(result.NullableTestClassEnumerable);
-            Assert.True(result.NullableTestClassEnumerable.Count() >= 3 && result.NullableTestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassEnumerable.Count()}");
+            Assert.True(result.NullableTestClassEnumerable.Count() >= 3 && result.NullableTestClassEnumerable.Count() <= 5, $"Enumerable count is not between 3 and 5. Count: {result.NullableTestClassEnumerable.Count()}");
             Assert.NotNull(result.NullableTestClassCollection);
-            Assert.True(result.NullableTestClassCollection.Count >= 3 && result.NullableTestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestClassCollection.Count}");
+            Assert.True(result.NullableTestClassCollection.Count >= 3 && result.NullableTestClassCollection.Count <= 5, $"Collection count is not between 3 and 5. Count: {result.NullableTestClassCollection.Count}");
+            Assert.NotNull(result.NullableTestClassIList);
+            Assert.True(result.NullableTestClassIList.Count >= 3 && result.NullableTestClassIList.Count <= 5, $"IList count is not between 3 and 5. Count: {result.NullableTestClassIList.Count}");
             Assert.NotNull(result.NullableTestQueue);
-            Assert.True(result.NullableTestQueue.Count() >= 3 && result.NullableTestQueue.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestQueue.Count()}");
+            Assert.True(result.NullableTestQueue.Count() >= 3 && result.NullableTestQueue.Count() <= 5, $"Queue count is not between 3 and 5. Count: {result.NullableTestQueue.Count()}");
             Assert.NotNull(result.NullableTestStack);
-            Assert.True(result.NullableTestStack.Count() >= 3 && result.NullableTestStack.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestStack.Count()}");
+            Assert.True(result.NullableTestStack.Count() >= 3 && result.NullableTestStack.Count() <= 5, $"Stack count is not between 3 and 5. Count: {result.NullableTestStack.Count()}");
             Assert.NotNull(result.NullableTestHashSet);
-            Assert.True(result.NullableTestHashSet.Count() >= 3 && result.NullableTestHashSet.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.NullableTestHashSet.Count()}");
+            Assert.True(result.NullableTestHashSet.Count() >= 3 && result.NullableTestHashSet.Count() <= 5, $"Hash set count is not between 3 and 5. Count: {result.NullableTestHashSet.Count()}");
 
             /** Non-nullable Properties */
             Assert.False(string.IsNullOrEmpty(result.TestString), "TestString is null or empty."); // String
@@ -105,22 +107,24 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.NotNull(result.TestIntClassIDictionary);
             Assert.True(result.TestIntClassIDictionary.Count >= 3 && result.TestIntClassIDictionary.Count <= 5, $"class-class dictionary count is not between 3 and 5. Count: {result.TestIntClassIDictionary.Count}");
 
-            Assert.NotNull(result.TestIntList);                       // Lists
+            Assert.NotNull(result.TestIntList);                       // Enumerables
             Assert.True(result.TestIntList.Count >= 3 && result.TestIntList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestIntList.Count}");
             Assert.NotNull(result.TestStringList);
-            Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestStringList.Count}");
+            Assert.True(result.TestStringList.Count >= 3 && result.TestStringList.Count <= 5, $"String list count is not between 3 and 5. Count: {result.TestStringList.Count}");
             Assert.NotNull(result.TestClassList);
-            Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassList.Count}");
+            Assert.True(result.TestClassList.Count >= 3 && result.TestClassList.Count <= 5, $"Class list count is not between 3 and 5. Count: {result.TestClassList.Count}");
             Assert.NotNull(result.TestClassEnumerable);
-            Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassEnumerable.Count()}");
+            Assert.True(result.TestClassEnumerable.Count() >= 3 && result.TestClassEnumerable.Count() <= 5, $"Enumerable count is not between 3 and 5. Count: {result.TestClassEnumerable.Count()}");
             Assert.NotNull(result.TestClassCollection);
-            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Int list count is not between 3 and 5. Count: {result.TestClassCollection.Count}");
+            Assert.True(result.TestClassCollection.Count >= 3 && result.TestClassCollection.Count <= 5, $"Collection count is not between 3 and 5. Count: {result.TestClassCollection.Count}");
+            Assert.NotNull(result.TestClassIList);
+            Assert.True(result.TestClassIList.Count >= 3 && result.TestClassIList.Count <= 5, $"IList count is not between 3 and 5. Count: {result.TestClassIList.Count}");
             Assert.NotNull(result.TestQueue);
-            Assert.True(result.TestQueue.Count() >= 3 && result.TestQueue.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestQueue.Count()}");
+            Assert.True(result.TestQueue.Count() >= 3 && result.TestQueue.Count() <= 5, $"Queue count is not between 3 and 5. Count: {result.TestQueue.Count()}");
             Assert.NotNull(result.TestStack);
-            Assert.True(result.TestStack.Count() >= 3 && result.TestStack.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestStack.Count()}");
+            Assert.True(result.TestStack.Count() >= 3 && result.TestStack.Count() <= 5, $"Stack count is not between 3 and 5. Count: {result.TestStack.Count()}");
             Assert.NotNull(result.TestHashSet);
-            Assert.True(result.TestHashSet.Count() >= 3 && result.TestHashSet.Count() <= 5, $"Int list count is not between 3 and 5. Count: {result.TestHashSet.Count()}");
+            Assert.True(result.TestHashSet.Count() >= 3 && result.TestHashSet.Count() <= 5, $"Hash set count is not between 3 and 5. Count: {result.TestHashSet.Count()}");
         }
 
         [Fact]
@@ -132,7 +136,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             var timeSpanValue = TimeSpan.FromSeconds(5);
 
             // Act
-            var result = ClassGenerator.Generate(new (Expression<Func<TestClass, object?>>, Func<object?>)[] {
+            var result = ClassGenerator.Generate(new (Expression<Func<TestClass, object?>>, Func<object?>?)[] {
                 (x => x.TestBaseInt, () => 1),
                 (x => x.TestSByte, () => (sbyte)1),
                 (x => x.TestByte, () => (byte)1),
@@ -215,6 +219,92 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.Equal(2, result.TestMemberClass.TestStruct.testValue4);
         }
 
+        [Fact]
+        public void Generate_WhenThereIsNestedReferencing_ShouldGenerateClassWithOneDepth()
+        {
+            // Act
+            var result = ClassGenerator.Generate<RecursiveClass1>();
+
+            // Assert
+            Assert.NotNull(result);
+
+            // Recursive class 1
+            Assert.NotNull(result.NullableTestInt);
+
+            Assert.NotNull(result.RecursiveClass2);
+            Assert.NotNull(result.NullableRecursiveClass2);
+
+            Assert.NotNull(result.RecursiveClass2Array);
+            Assert.True(result.RecursiveClass2Array.Length >= 3 && result.RecursiveClass2Array.Length <= 5, $"Array length is not between 3 and 5. Length: {result.RecursiveClass2Array.Length}");
+
+            Assert.NotNull(result.RecursiveClass2DictionaryKey);
+            Assert.True(result.RecursiveClass2DictionaryKey.Count >= 3 && result.RecursiveClass2DictionaryKey.Count <= 5, $"Dictionary key count is not between 3 and 5. Length: {result.RecursiveClass2DictionaryKey.Count}");
+            Assert.NotNull(result.RecursiveClass2DictionaryValue);
+            Assert.True(result.RecursiveClass2DictionaryValue.Count >= 3 && result.RecursiveClass2DictionaryValue.Count <= 5, $"Dictionary value count is not between 3 and 5. Length: {result.RecursiveClass2DictionaryValue.Count}");
+            Assert.NotNull(result.RecursiveClass2Dictionary);
+            Assert.True(result.RecursiveClass2Dictionary.Count >= 3 && result.RecursiveClass2Dictionary.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Dictionary.Count}");
+
+            Assert.NotNull(result.RecursiveClass2List);
+            Assert.True(result.RecursiveClass2List.Count >= 3 && result.RecursiveClass2List.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2List.Count}");
+            Assert.NotNull(result.RecursiveClass2Enumerable);
+            Assert.True(result.RecursiveClass2Enumerable.Count() >= 3 && result.RecursiveClass2Enumerable.Count() <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Enumerable.Count()}");
+            Assert.NotNull(result.RecursiveClass2Collection);
+            Assert.True(result.RecursiveClass2Collection.Count >= 3 && result.RecursiveClass2Collection.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Collection.Count}");
+            Assert.NotNull(result.RecursiveClass2IList);
+            Assert.True(result.RecursiveClass2IList.Count >= 3 && result.RecursiveClass2IList.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2IList.Count}");
+            Assert.NotNull(result.RecursiveClass2Queue);
+            Assert.True(result.RecursiveClass2Queue.Count >= 3 && result.RecursiveClass2Queue.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Queue.Count}");
+            Assert.NotNull(result.RecursiveClass2Stack);
+            Assert.True(result.RecursiveClass2Stack.Count >= 3 && result.RecursiveClass2Stack.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Stack.Count}");
+            Assert.NotNull(result.RecursiveClass2HashSet);
+            Assert.True(result.RecursiveClass2HashSet.Count >= 3 && result.RecursiveClass2HashSet.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2HashSet.Count}");
+
+            // Reference class 2
+            Assert.NotNull(result.RecursiveClass2.NullableTestInt);
+
+            Assert.Null(result.RecursiveClass2.RecursiveClass1);
+            Assert.Null(result.RecursiveClass2.NullableRecursiveClass1);
+
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Array);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Array);
+            
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1DictionaryKey);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1DictionaryKey);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1DictionaryValue);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1DictionaryValue);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Dictionary);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Dictionary);
+
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1List);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1List);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Enumerable);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Enumerable);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Collection);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Collection);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1IList);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1IList);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Queue);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Queue);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1Stack);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1Stack);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1HashSet);
+            Assert.Empty(result.RecursiveClass2.RecursiveClass1HashSet);
+        }
+
+        [Fact]
+        public void Generate_WhenClassIsAbstract_ShouldThrowException()
+        {
+            // Act
+            var result = Record.Exception(() =>
+            {
+                ClassGenerator.Generate<TestAbstractClass>();
+            });
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<MissingMethodException>(result);
+        }
+
         private string ReturnOneString() => "1";
 
         private class TestClassBase
@@ -256,6 +346,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             public List<TestMemberClass>? NullableTestClassList { get; set; } = null;
             public IEnumerable<TestMemberClass>? NullableTestClassEnumerable { get; set; } = null;
             public ICollection<TestMemberClass>? NullableTestClassCollection { get; set; } = null;
+            public IList<TestMemberClass>? NullableTestClassIList { get; set; } = null;
             public Queue<TestMemberClass>? NullableTestQueue { get; set; } = null;
             public Stack<TestMemberClass>? NullableTestStack { get; set; } = null;
             public HashSet<TestMemberClass>? NullableTestHashSet { get; set; } = null;
@@ -291,6 +382,7 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             public List<TestMemberClass> TestClassList { get; set; }
             public IEnumerable<TestMemberClass> TestClassEnumerable { get; set; }
             public ICollection<TestMemberClass> TestClassCollection { get; set; }
+            public IList<TestMemberClass> TestClassIList { get; set; }
             public Queue<TestMemberClass> TestQueue { get; set; }
             public Stack<TestMemberClass> TestStack { get; set; }
             public HashSet<TestMemberClass> TestHashSet { get; set; }
@@ -326,6 +418,49 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             public DateTime TestDateTime { get; set; }
             public ETestEnum TestEnum { get; set; }
             public TestStruct TestStruct { get; set; }
+        }
+
+        private class RecursiveClass1
+        {
+            public int? NullableTestInt { get; set; }
+            public RecursiveClass2 RecursiveClass2 { get; set; }
+            public RecursiveClass2? NullableRecursiveClass2 { get; set; }
+            public RecursiveClass2[] RecursiveClass2Array { get; set; }
+            public Dictionary<RecursiveClass2, int> RecursiveClass2DictionaryKey { get; set; }
+            public Dictionary<int, RecursiveClass2> RecursiveClass2DictionaryValue { get; set; }
+            public Dictionary<RecursiveClass2, RecursiveClass2> RecursiveClass2Dictionary { get; set; }
+            public IDictionary<int, RecursiveClass2> RecursiveClass2IDictionary { get; set; }
+            public List<RecursiveClass2> RecursiveClass2List { get; set; }
+            public IEnumerable<RecursiveClass2> RecursiveClass2Enumerable { get; set; }
+            public ICollection<RecursiveClass2> RecursiveClass2Collection { get; set; }
+            public IList<RecursiveClass2> RecursiveClass2IList { get; set; }
+            public Queue<RecursiveClass2> RecursiveClass2Queue { get; set; }
+            public Stack<RecursiveClass2> RecursiveClass2Stack { get; set; }
+            public HashSet<RecursiveClass2> RecursiveClass2HashSet { get; set; }
+        }
+
+        private class RecursiveClass2
+        {
+            public int? NullableTestInt { get; set; }
+            public RecursiveClass1 RecursiveClass1 { get; set; }
+            public RecursiveClass1? NullableRecursiveClass1 { get; set; }
+            public RecursiveClass1[] RecursiveClass1Array { get; set; }
+            public Dictionary<RecursiveClass1, int> RecursiveClass1DictionaryKey { get; set; }
+            public Dictionary<int, RecursiveClass1> RecursiveClass1DictionaryValue { get; set; }
+            public Dictionary<RecursiveClass1, RecursiveClass1> RecursiveClass1Dictionary { get; set; }
+            public IDictionary<int, RecursiveClass1> RecursiveClass1IDictionary { get; set; }
+            public List<RecursiveClass1> RecursiveClass1List { get; set; }
+            public IEnumerable<RecursiveClass1> RecursiveClass1Enumerable { get; set; }
+            public ICollection<RecursiveClass1> RecursiveClass1Collection { get; set; }
+            public IList<RecursiveClass1> RecursiveClass1IList { get; set; }
+            public Queue<RecursiveClass1> RecursiveClass1Queue { get; set; }
+            public Stack<RecursiveClass1> RecursiveClass1Stack { get; set; }
+            public HashSet<RecursiveClass1> RecursiveClass1HashSet { get; set; }
+        }
+
+        private abstract class TestAbstractClass
+        {
+            public int? NullableTestInt { get; set; }
         }
     }
 }

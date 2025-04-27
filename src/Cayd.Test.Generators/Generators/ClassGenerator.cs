@@ -57,6 +57,10 @@ namespace Cayd.Test.Generators
 #endif
         public static T Generate<T>(params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
             where T : class
+            => Generate(typeof(T), false, propertiesAndGenerators);
+
+        private static T Generate<T>(Type mainType, bool skipMainType, params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
+            where T : class
         {
             var type = typeof(T);
             var instance = Activator.CreateInstance(type);
@@ -92,52 +96,64 @@ namespace Cayd.Test.Generators
                     if (propertyType.IsArray)
                     {
                         var arrayType = propertyType.GetElementType()!;
-                        var array = Array.CreateInstance(arrayType, System.Random.Shared.NextInt(minCollectionCount, maxCollectionCount));
-
-                        for (int i = 0; i < array.Length; ++i)
+                        if (skipMainType && mainType == arrayType)
                         {
-                            object generatedValue;
-                            if (arrayType == typeof(string) || arrayType.IsValueType)
-                            {
-                                generatedValue = GeneratePrimitiveType(arrayType);
-                            }
-                            else
-                            {
-                                var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(arrayType);
-                                var funcType = typeof(Func<,>).MakeGenericType(arrayType, typeof(object));
-                                var expressionType = typeof(Expression<>).MakeGenericType(funcType);
-                                var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
+                            var array = Array.CreateInstance(arrayType, 0);
+                            propertyInfo.SetValue(instance, array);
+                        }
+                        else
+                        {
+                            var array = Array.CreateInstance(arrayType, System.Random.Shared.NextInt(minCollectionCount, maxCollectionCount));
 
-                                generatedValue = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                            for (int i = 0; i < array.Length; ++i)
+                            {
+                                object generatedValue;
+                                if (arrayType == typeof(string) || arrayType.IsValueType)
+                                {
+                                    generatedValue = GeneratePrimitiveType(arrayType);
+                                }
+                                else
+                                {
+                                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(arrayType);
+                                    var funcType = typeof(Func<,>).MakeGenericType(arrayType, typeof(object));
+                                    var expressionType = typeof(Expression<>).MakeGenericType(funcType);
+                                    var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
+
+                                    generatedValue = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                                }
+
+                                array.SetValue(generatedValue, i);
                             }
 
-                            array.SetValue(generatedValue, i);
+                            propertyInfo.SetValue(instance, array);
                         }
 
-                        propertyInfo.SetValue(instance, array);
                         continue;
                     }
 
                     // Collection types
                     var interfaces = propertyType.GetInterfaces();
-                    if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>)) || 
+                    if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>)) ||
                         (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>))))
                     {
-                        var dictionary = DictionaryGenerator.Generate(propertyType.GenericTypeArguments[0], propertyType.GenericTypeArguments[1], minCollectionCount, maxCollectionCount);
+                        var keyType = propertyType.GenericTypeArguments[0];
+                        var valueType = propertyType.GenericTypeArguments[1];
+                        var dictionary = DictionaryGenerator.Generate(skipMainType ? mainType : null, keyType, valueType, minCollectionCount, maxCollectionCount);
                         propertyInfo.SetValue(instance, dictionary);
                         continue;
                     }
                     if ((propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IEnumerable<>)) ||
                         (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
                     {
-                        var enumerable = EnumerableGenerator.Generate(propertyType.GenericTypeArguments[0], minCollectionCount, maxCollectionCount);
+                        var elementType = propertyType.GenericTypeArguments[0];
+                        var enumerable = EnumerableGenerator.Generate(skipMainType ? mainType : null, elementType, minCollectionCount, maxCollectionCount);
 
                         var propertyGenericTypeDef = propertyType.GetGenericTypeDefinition();
-                        if (propertyGenericTypeDef == typeof(Queue<>) || 
-                            propertyGenericTypeDef == typeof(Stack<>) || 
+                        if (propertyGenericTypeDef == typeof(Queue<>) ||
+                            propertyGenericTypeDef == typeof(Stack<>) ||
                             propertyGenericTypeDef == typeof(HashSet<>))
                         {
-                            var propertyGenericType = propertyGenericTypeDef.MakeGenericType(propertyType.GenericTypeArguments[0]);
+                            var propertyGenericType = propertyGenericTypeDef.MakeGenericType(elementType);
                             propertyInfo.SetValue(instance, Activator.CreateInstance(propertyGenericType, new object[] { enumerable }));
                         }
                         else
@@ -151,12 +167,15 @@ namespace Cayd.Test.Generators
                     // A class type
                     if (propertyType.IsClass)
                     {
-                        var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(propertyType);
+                        if (skipMainType && propertyType == mainType)
+                            continue;
+
+                        var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(propertyType);
                         var funcType = typeof(Func<,>).MakeGenericType(propertyType, typeof(object));
                         var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                         var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                        propertyInfo.SetValue(instance, generateMethod.Invoke(null, new object[] { methodParameter }));
+                        propertyInfo.SetValue(instance, generateMethod.Invoke(null, new object[] { mainType, true, methodParameter }));
                         continue;
                     }
 

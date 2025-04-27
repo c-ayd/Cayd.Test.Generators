@@ -12,7 +12,7 @@ namespace Cayd.Test.Generators
         /// <typeparam name="T">Element type of the enumerable.</typeparam>
         /// <returns>Returns a <see cref="IEnumerable{T}"/>.</returns>
         public static IEnumerable<T> Generate<T>()
-            => GenerateEnumerable<T>(3, 6);
+            => GenerateEnumerable<T>(null, 3, 6);
 
         /// <summary>
         /// Generates an <see cref="IEnumerable{T}"/> with an element count between 0 and a specified max count.
@@ -22,7 +22,7 @@ namespace Cayd.Test.Generators
         /// <returns>Returns a <see cref="IEnumerable{T}"/>.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static IEnumerable<T> Generate<T>(int maxCount)
-            => GenerateEnumerable<T>(0, maxCount);
+            => GenerateEnumerable<T>(null, 0, maxCount);
 
         /// <summary>
         /// Generates an <see cref="IEnumerable{T}"/> with an element count between specified min and max counts.
@@ -33,15 +33,15 @@ namespace Cayd.Test.Generators
         /// <returns>Returns a <see cref="IEnumerable{T}"/>.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static IEnumerable<T> Generate<T>(int minCount, int maxCount)
-            => GenerateEnumerable<T>(minCount, maxCount);
+            => GenerateEnumerable<T>(null, minCount, maxCount);
 
-        internal static object Generate(Type elementType, int minCount, int maxCount)
+        internal static object Generate(Type? skipType, Type elementType, int minCount, int maxCount)
         {
             var generateMethod = typeof(EnumerableGenerator).GetMethod(nameof(GenerateEnumerable), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(elementType);
-            return generateMethod.Invoke(null, new object[] { minCount, maxCount })!;
+            return generateMethod.Invoke(null, new object?[] { skipType, minCount, maxCount })!;
         }
 
-        private static IEnumerable<T> GenerateEnumerable<T>(int minCount, int maxCount)
+        private static IEnumerable<T> GenerateEnumerable<T>(Type? skipType, int minCount, int maxCount)
         {
             if (minCount < 0)
                 throw new ArgumentOutOfRangeException(nameof(minCount), minCount, "The minimum count must be equal to or greater than 0.");
@@ -51,6 +51,9 @@ namespace Cayd.Test.Generators
             var elementType = typeof(T);
             var listType = typeof(List<>).MakeGenericType(elementType);
             var list = Activator.CreateInstance(listType);
+
+            if (skipType != null && typeof(T) == skipType)
+                return (IEnumerable<T>)list!;
 
             int count = System.Random.Shared.NextInt(minCount, maxCount);
             var addMethod = listType.GetMethod("Add")!;
