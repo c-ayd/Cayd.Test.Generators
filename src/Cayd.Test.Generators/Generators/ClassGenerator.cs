@@ -41,7 +41,7 @@ namespace Cayd.Test.Generators
         /// </code>
         /// Example usage 2:
         /// <code>
-        /// Generate(new (Expression&lt;Func&lt;MyClass, object?&gt;&gt;, Func&lt;object?&gt;)[] {
+        /// Generate(new (Expression&lt;Func&lt;MyClass, object?&gt;&gt;, Func&lt;object?&gt;?)[] {
         ///     (x => x.Property1, GeneratorMethod),
         ///     (x => x.Property2, () => GeneratorMethod(param1, param2, ...)),
         ///     (x => x.Property3, () => "Exact value instead of random"),
@@ -55,7 +55,7 @@ namespace Cayd.Test.Generators
         /// <param name="propertiesAndGenerators">Optional custom property generators</param>
         /// <returns>Returns an instance of the specified class.</returns>
 #endif
-        public static T Generate<T>(params (Expression<Func<T, object?>> property, Func<object?> valueGenerator)[] propertiesAndGenerators)
+        public static T Generate<T>(params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
             where T : class
         {
             var type = typeof(T);
