@@ -57,9 +57,9 @@ namespace Cayd.Test.Generators
 #endif
         public static T Generate<T>(params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
             where T : class
-            => Generate(typeof(T), false, propertiesAndGenerators);
+            => Generate(typeof(T), propertiesAndGenerators);
 
-        private static T Generate<T>(Type mainType, bool skipMainType, params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
+        private static T Generate<T>(Type mainType, params (Expression<Func<T, object?>> property, Func<object?>? valueGenerator)[] propertiesAndGenerators)
             where T : class
         {
             var type = typeof(T);
@@ -96,7 +96,7 @@ namespace Cayd.Test.Generators
                     if (propertyType.IsArray)
                     {
                         var arrayType = propertyType.GetElementType()!;
-                        if (skipMainType && mainType == arrayType)
+                        if (mainType == arrayType)
                         {
                             var array = Array.CreateInstance(arrayType, 0);
                             propertyInfo.SetValue(instance, array);
@@ -114,12 +114,16 @@ namespace Cayd.Test.Generators
                                 }
                                 else
                                 {
-                                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(arrayType);
+                                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(arrayType);
                                     var funcType = typeof(Func<,>).MakeGenericType(arrayType, typeof(object));
                                     var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                                     var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                                    generatedValue = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                                    generatedValue = generateMethod.Invoke(null, new object[] 
+                                    {
+                                        mainType,
+                                        methodParameter 
+                                    })!;
                                 }
 
                                 array.SetValue(generatedValue, i);
@@ -138,7 +142,7 @@ namespace Cayd.Test.Generators
                     {
                         var keyType = propertyType.GenericTypeArguments[0];
                         var valueType = propertyType.GenericTypeArguments[1];
-                        var dictionary = DictionaryGenerator.Generate(skipMainType ? mainType : null, keyType, valueType, minCollectionCount, maxCollectionCount);
+                        var dictionary = DictionaryGenerator.Generate(mainType, keyType, valueType, minCollectionCount, maxCollectionCount);
                         propertyInfo.SetValue(instance, dictionary);
                         continue;
                     }
@@ -146,7 +150,7 @@ namespace Cayd.Test.Generators
                         (interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
                     {
                         var elementType = propertyType.GenericTypeArguments[0];
-                        var enumerable = EnumerableGenerator.Generate(skipMainType ? mainType : null, elementType, minCollectionCount, maxCollectionCount);
+                        var enumerable = EnumerableGenerator.Generate(mainType, elementType, minCollectionCount, maxCollectionCount);
 
                         var propertyGenericTypeDef = propertyType.GetGenericTypeDefinition();
                         if (propertyGenericTypeDef == typeof(Queue<>) ||
@@ -167,7 +171,7 @@ namespace Cayd.Test.Generators
                     // A class type
                     if (propertyType.IsClass)
                     {
-                        if (skipMainType && propertyType == mainType)
+                        if (propertyType == mainType)
                             continue;
 
                         var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(propertyType);
@@ -175,7 +179,11 @@ namespace Cayd.Test.Generators
                         var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                         var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                        propertyInfo.SetValue(instance, generateMethod.Invoke(null, new object[] { mainType, true, methodParameter }));
+                        propertyInfo.SetValue(instance, generateMethod.Invoke(null, new object[] 
+                        { 
+                            mainType,
+                            methodParameter
+                        }));
                         continue;
                     }
 

@@ -70,12 +70,16 @@ namespace Cayd.Test.Generators
                 }
                 else
                 {
-                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(keyType);
+                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(keyType);
                     var funcType = typeof(Func<,>).MakeGenericType(keyType, typeof(object));
                     var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                     var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                    generatedKey = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                    generatedKey = generateMethod.Invoke(null, new object[] 
+                    {
+                        skipType ?? keyType,
+                        methodParameter 
+                    })!;
                 }
 
                 object? generatedValue;
@@ -91,12 +95,16 @@ namespace Cayd.Test.Generators
                     }
                     else
                     {
-                        var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(valueType);
+                        var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(valueType);
                         var funcType = typeof(Func<,>).MakeGenericType(valueType, typeof(object));
                         var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                         var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                        generatedValue = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                        generatedValue = generateMethod.Invoke(null, new object[] 
+                        {
+                            skipType ?? valueType,
+                            methodParameter
+                        })!;
                     }
                 }
 

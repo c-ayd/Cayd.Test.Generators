@@ -52,7 +52,7 @@ namespace Cayd.Test.Generators
             var listType = typeof(List<>).MakeGenericType(elementType);
             var list = Activator.CreateInstance(listType);
 
-            if (skipType != null && typeof(T) == skipType)
+            if (skipType != null && elementType == skipType)
                 return (IEnumerable<T>)list!;
 
             int count = System.Random.Shared.NextInt(minCount, maxCount);
@@ -66,12 +66,16 @@ namespace Cayd.Test.Generators
                 }
                 else
                 {
-                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.Public)!.MakeGenericMethod(elementType);
+                    var generateMethod = typeof(ClassGenerator).GetMethod(nameof(ClassGenerator.Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(elementType);
                     var funcType = typeof(Func<,>).MakeGenericType(elementType, typeof(object));
                     var expressionType = typeof(Expression<>).MakeGenericType(funcType);
                     var methodParameter = Array.CreateInstance(typeof(ValueTuple<,>).MakeGenericType(expressionType, typeof(Func<object>)), 0);
 
-                    generatedElement = generateMethod.Invoke(null, new object[] { methodParameter })!;
+                    generatedElement = generateMethod.Invoke(null, new object[] 
+                    {
+                        skipType ?? elementType,
+                        methodParameter 
+                    })!;
                 }
 
                 addMethod.Invoke(list, new object[] { generatedElement });

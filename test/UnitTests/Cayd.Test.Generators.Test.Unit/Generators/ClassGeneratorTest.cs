@@ -227,22 +227,24 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
 
             // Assert
             Assert.NotNull(result);
-
+            
             // Recursive class 1
             Assert.NotNull(result.NullableTestInt);
-
+            
             Assert.NotNull(result.RecursiveClass2);
             Assert.NotNull(result.NullableRecursiveClass2);
-
+            
             Assert.NotNull(result.RecursiveClass2Array);
             Assert.True(result.RecursiveClass2Array.Length >= 3 && result.RecursiveClass2Array.Length <= 5, $"Array length is not between 3 and 5. Length: {result.RecursiveClass2Array.Length}");
-
+            
             Assert.NotNull(result.RecursiveClass2DictionaryKey);
             Assert.True(result.RecursiveClass2DictionaryKey.Count >= 3 && result.RecursiveClass2DictionaryKey.Count <= 5, $"Dictionary key count is not between 3 and 5. Length: {result.RecursiveClass2DictionaryKey.Count}");
             Assert.NotNull(result.RecursiveClass2DictionaryValue);
             Assert.True(result.RecursiveClass2DictionaryValue.Count >= 3 && result.RecursiveClass2DictionaryValue.Count <= 5, $"Dictionary value count is not between 3 and 5. Length: {result.RecursiveClass2DictionaryValue.Count}");
             Assert.NotNull(result.RecursiveClass2Dictionary);
             Assert.True(result.RecursiveClass2Dictionary.Count >= 3 && result.RecursiveClass2Dictionary.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Dictionary.Count}");
+            Assert.NotNull(result.RecursiveClass2IDictionary);
+            Assert.True(result.RecursiveClass2IDictionary.Count >= 3 && result.RecursiveClass2IDictionary.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2IDictionary.Count}");
 
             Assert.NotNull(result.RecursiveClass2List);
             Assert.True(result.RecursiveClass2List.Count >= 3 && result.RecursiveClass2List.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2List.Count}");
@@ -258,22 +260,24 @@ namespace Cayd.Test.Generators.Test.Unit.Generators
             Assert.True(result.RecursiveClass2Stack.Count >= 3 && result.RecursiveClass2Stack.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2Stack.Count}");
             Assert.NotNull(result.RecursiveClass2HashSet);
             Assert.True(result.RecursiveClass2HashSet.Count >= 3 && result.RecursiveClass2HashSet.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2HashSet.Count}");
-
+            
             // Reference class 2
             Assert.NotNull(result.RecursiveClass2.NullableTestInt);
-
+            
             Assert.Null(result.RecursiveClass2.RecursiveClass1);
             Assert.Null(result.RecursiveClass2.NullableRecursiveClass1);
-
+            
             Assert.NotNull(result.RecursiveClass2.RecursiveClass1Array);
             Assert.Empty(result.RecursiveClass2.RecursiveClass1Array);
             
             Assert.NotNull(result.RecursiveClass2.RecursiveClass1DictionaryKey);
             Assert.Empty(result.RecursiveClass2.RecursiveClass1DictionaryKey);
             Assert.NotNull(result.RecursiveClass2.RecursiveClass1DictionaryValue);
-            Assert.Empty(result.RecursiveClass2.RecursiveClass1DictionaryValue);
+            Assert.True(result.RecursiveClass2DictionaryValue.Count >= 3 && result.RecursiveClass2DictionaryValue.Count <= 5, $"Dictionary value count is not between 3 and 5. Length: {result.RecursiveClass2DictionaryValue.Count}");
             Assert.NotNull(result.RecursiveClass2.RecursiveClass1Dictionary);
             Assert.Empty(result.RecursiveClass2.RecursiveClass1Dictionary);
+            Assert.NotNull(result.RecursiveClass2.RecursiveClass1IDictionary);
+            Assert.True(result.RecursiveClass2.RecursiveClass1IDictionary.Count >= 3 && result.RecursiveClass2.RecursiveClass1IDictionary.Count <= 5, $"Dictionary count is not between 3 and 5. Length: {result.RecursiveClass2.RecursiveClass1IDictionary.Count}");
 
             Assert.NotNull(result.RecursiveClass2.RecursiveClass1List);
             Assert.Empty(result.RecursiveClass2.RecursiveClass1List);
