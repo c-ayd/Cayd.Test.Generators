@@ -56,7 +56,7 @@ namespace Cayd.Test.Generators
             var dictionaryType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
             var dictionary = Activator.CreateInstance(dictionaryType);
 
-            if (skipType != null && keyType == skipType)
+            if ((skipType != null && keyType == skipType) || keyType.IsAbstract)
                 return (IDictionary<TKey, TValue>)dictionary!;
 
             int count = System.Random.Shared.NextInt(minCount, maxCount);
@@ -89,7 +89,7 @@ namespace Cayd.Test.Generators
                 }
                 else
                 {
-                    if (skipType != null && valueType == skipType)
+                    if ((skipType != null && valueType == skipType) || valueType.IsAbstract)
                     {
                         generatedValue = null;
                     }

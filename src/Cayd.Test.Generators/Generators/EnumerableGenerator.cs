@@ -52,7 +52,7 @@ namespace Cayd.Test.Generators
             var listType = typeof(List<>).MakeGenericType(elementType);
             var list = Activator.CreateInstance(listType);
 
-            if (skipType != null && elementType == skipType)
+            if ((skipType != null && elementType == skipType) || elementType.IsAbstract)
                 return (IEnumerable<T>)list!;
 
             int count = System.Random.Shared.NextInt(minCount, maxCount);

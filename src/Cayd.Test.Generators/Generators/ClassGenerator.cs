@@ -96,7 +96,7 @@ namespace Cayd.Test.Generators
                     if (propertyType.IsArray)
                     {
                         var arrayType = propertyType.GetElementType()!;
-                        if (mainType == arrayType)
+                        if (mainType == arrayType || arrayType.IsAbstract)
                         {
                             var array = Array.CreateInstance(arrayType, 0);
                             propertyInfo.SetValue(instance, array);
@@ -171,7 +171,7 @@ namespace Cayd.Test.Generators
                     // A class type
                     if (propertyType.IsClass)
                     {
-                        if (propertyType == mainType)
+                        if (propertyType == mainType || propertyType.IsAbstract)
                             continue;
 
                         var generateMethod = typeof(ClassGenerator).GetMethod(nameof(Generate), BindingFlags.Static | BindingFlags.NonPublic)!.MakeGenericMethod(propertyType);
