@@ -44,6 +44,9 @@ public class Book
     public string Name { get; set; }
     public EStatus Status { get; set; }
     public DateTime CreatedDate { get; set; }
+
+    // This would normally cause infinite recursive calls, however, ClassGenerator can detect them at one level of depth. This variable will be set to null
+    public Author Author { get; set; }
 }
 
 public enum EStatus
