@@ -6,17 +6,16 @@
     <Nullable>enable</Nullable>
     <PackageId>Cayd.Test.Generators</PackageId>
     <Title>Utility library to generate values, classes and collections for tests</Title>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Authors>Cemal A. Aydeniz</Authors>
     <Product>Cayd.Test.Generators to generate values and classes for tests</Product>
     <Description>A utility library for tests that simplifies the generation of variables, classes and collections</Description>
     <PackageProjectUrl>https://github.com/c-ayd/Cayd.Test.Generators/wiki</PackageProjectUrl>
     <PackageIcon>nuget-logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/c-ayd/Cayd.Test.Generators.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/c-ayd/Cayd.Test.Generators</RepositoryUrl>
     <PackageTags>cayd;test;generators;utility;xunit;value-generator;class-generator;collection-generator</PackageTags>
-    <PackageReleaseNotes>ClassGenerator now skips abstract classes</PackageReleaseNotes>
+    <PackageReleaseNotes>Update package info</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
