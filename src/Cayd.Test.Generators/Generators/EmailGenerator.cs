@@ -49,10 +49,11 @@ namespace Cayd.Test.Generators
 
             builder.Append('.');
 
-            for (int i = 0; i < tldLength; ++i)
+            for (int i = 0; i < tldLength - 1; ++i)
             {
                 builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
             }
+            builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
 
             return builder.ToString();
         }
@@ -100,7 +101,7 @@ namespace Cayd.Test.Generators
                 {
                     localPartCharacters = new List<char>()
                     {
-                        '!', '#', '$', '%', '&', '*', '+', '/', '=', '?', '^', '_', '{', '|', '}', '~', '-', '`'
+                        '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}', '~',
                     };
 
                     for (char i = 'A'; i <= 'Z'; ++i)
