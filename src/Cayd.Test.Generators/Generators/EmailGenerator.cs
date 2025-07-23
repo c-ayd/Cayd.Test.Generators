@@ -34,26 +34,64 @@ namespace Cayd.Test.Generators
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
-            for (int i = 0; i < localPartLength - 1; ++i)
+            if (localPartLength > 0)
             {
-                builder.Append(LocalPartCharacters[System.Random.Shared.Next(0, LocalPartCharacters.Count)]);
+                builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+                for (int i = 0; i < localPartLength - 1; ++i)
+                {
+                    builder.Append(LocalPartCharacters[System.Random.Shared.Next(0, LocalPartCharacters.Count)]);
+                }
             }
 
             builder.Append('@');
 
-            for (int i = 0; i < domainPartLength; ++i)
+            if (domainPartLength > 0)
             {
-                builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
+                builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+
+                --domainPartLength;
+                for (; domainPartLength > 1; --domainPartLength)
+                {
+                    if (NonSpecialCharacters.Contains(builder[builder.Length - 1]))
+                    {
+                        builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
+                    }
+                    else
+                    {
+                        builder.Append(NonSpecialCharacters[System.Random.Shared.Next(0, NonSpecialCharacters.Count)]);
+                    }
+                }
+
+                if (domainPartLength > 0)
+                { 
+                    builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+                }
             }
 
             builder.Append('.');
 
-            for (int i = 0; i < tldLength - 1; ++i)
+            if (tldLength > 0)
             {
-                builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
+                builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+
+                --tldLength;
+                for (; tldLength > 1; --tldLength)
+                {
+                    if (AlphanumericCharacters.Contains(builder[builder.Length - 1]))
+                    {
+                        builder.Append(DomainCharacters[System.Random.Shared.Next(0, DomainCharacters.Count)]);
+                    }
+                    else
+                    {
+                        builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+                    }
+                }
+
+                if (tldLength > 0)
+                {
+                    builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
+                }
             }
-            builder.Append(AlphanumericCharacters[System.Random.Shared.Next(0, AlphanumericCharacters.Count)]);
 
             return builder.ToString();
         }
@@ -74,6 +112,42 @@ namespace Cayd.Test.Generators
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Sets the special characters that are allowed in the local part of generated emails.
+        /// </summary>
+        /// <param name="specialCharacters">Special characters that can be used in the local part of generated emails</param>
+        public static void SetSpecialCharacters(List<char> specialCharacters)
+        {
+            localPartCharacters = new List<char>();
+
+            for (int i = 0; i < specialCharacters.Count; ++i)
+                localPartCharacters.Add(specialCharacters[i]);
+            for (char i = 'A'; i <= 'Z'; ++i)
+                localPartCharacters.Add(i);
+            for (char i = 'a'; i <= 'z'; ++i)
+                localPartCharacters.Add(i);
+            for (char i = '0'; i <= '9'; ++i)
+                localPartCharacters.Add(i);
+        }
+
+        /// <summary>
+        /// Sets the special characters that are allowed in the local part of generated emails.
+        /// </summary>
+        /// <param name="specialCharacters">Special characters that can be used in the local part of generated emails</param>
+        public static void SetSpecialCharacters(params char[] specialCharacters)
+        {
+            localPartCharacters = new List<char>();
+
+            for (int i = 0; i < specialCharacters.Length; ++i)
+                localPartCharacters.Add(specialCharacters[i]);
+            for (char i = 'A'; i <= 'Z'; ++i)
+                localPartCharacters.Add(i);
+            for (char i = 'a'; i <= 'z'; ++i)
+                localPartCharacters.Add(i);
+            for (char i = '0'; i <= '9'; ++i)
+                localPartCharacters.Add(i);
+        }
+
         private static List<char>? alphanumericCharacters = null;
         private static List<char> AlphanumericCharacters
         {
@@ -92,6 +166,27 @@ namespace Cayd.Test.Generators
             }
         }
 
+        private static List<char>? nonSpecialCharacters = null;
+        private static List<char> NonSpecialCharacters
+        {
+            get
+            {
+                if (nonSpecialCharacters == null)
+                {
+                    nonSpecialCharacters = new List<char>();
+
+                    for (char i = 'A'; i <= 'Z'; ++i)
+                        nonSpecialCharacters.Add(i);
+                    for (char i = 'a'; i <= 'z'; ++i)
+                        nonSpecialCharacters.Add(i);
+                    for (char i = '0'; i <= '9'; ++i)
+                        nonSpecialCharacters.Add(i);
+                }
+
+                return nonSpecialCharacters;
+            }
+        }
+
         private static List<char>? localPartCharacters = null;
         private static List<char> LocalPartCharacters
         {
@@ -101,7 +196,7 @@ namespace Cayd.Test.Generators
                 {
                     localPartCharacters = new List<char>()
                     {
-                        '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^', '_', '`', '{', '|', '}', '~',
+                        '.', '_', '-'
                     };
 
                     for (char i = 'A'; i <= 'Z'; ++i)
