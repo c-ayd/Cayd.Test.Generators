@@ -10,14 +10,14 @@ namespace Cayd.Test.Generators.Generators
         public static readonly string Broadcast = "FF:FF:FF:FF:FF:FF";
 
         /// <summary>
-        /// Generates a unicast MAC address.
+        /// Generates a random unicast MAC address.
         /// </summary>
         /// <returns>Returns a unicast MAC address.</returns>
         public static string GenerateUnicast()
             => GenerateMacAddress(0x00);
 
         /// <summary>
-        /// Generates a multicast MAC address.
+        /// Generates a random multicast MAC address.
         /// </summary>
         /// <returns>Returns a multicast MAC address.</returns>
         public static string GenerateMulticast()
