@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <PackageId>Cayd.Test.Generators</PackageId>
     <Title>Utility library to generate values, classes and collections for tests</Title>
-    <Version>2.0.3</Version>
+    <Version>2.1.0</Version>
     <Authors>Cemal A. Aydeniz</Authors>
     <Product>Cayd.Test.Generators to generate values and classes for tests</Product>
     <Description>A utility library for tests that simplifies the generation of variables, classes and collections</Description>
@@ -15,7 +15,8 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/c-ayd/Cayd.Test.Generators</RepositoryUrl>
     <PackageTags>cayd;test;generators;utility;xunit;value-generator;class-generator;collection-generator</PackageTags>
-    <PackageReleaseNotes>Update email generator</PackageReleaseNotes>
+    <PackageReleaseNotes>- A new MAC address generator is added
+- The email generator is updated. It now generates emails based on very limited special characters. However, depending on the need, the special characters that are allowed for the local part of generated emails can be updated via the 'SetSpecialCharacters' method</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
