@@ -99,6 +99,7 @@ The package includes the following static utility classes:
 - `EnumGenerator`
 - `GuidGenerator`
 - `IpAddressGenerator`
+- `MacAddressGenerator`
 - `PasswordGenerator`
 - `PhoneNumberGenerator`
 - `StringGenerator`
