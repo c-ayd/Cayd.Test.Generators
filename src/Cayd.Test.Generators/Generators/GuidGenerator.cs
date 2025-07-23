@@ -1,4 +1,6 @@
-﻿namespace Cayd.Test.Generators
+﻿using System.Security.Cryptography;
+
+namespace Cayd.Test.Generators
 {
     public static class GuidGenerator
     {
@@ -17,7 +19,7 @@
         {
             byte[] dateTimeBytes = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
             byte[] randomBytes = new byte[8];
-            System.Random.Shared.NextBytes(randomBytes);
+            RandomNumberGenerator.Fill(randomBytes);
 
             byte[] guidBytes = new byte[16];
             Array.Copy(dateTimeBytes, 0, guidBytes, 0, 8);
